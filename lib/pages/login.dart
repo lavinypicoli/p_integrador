@@ -5,12 +5,22 @@ import 'package:scoped_model/scoped_model.dart';
 import '../main.dart';
 import 'menu_inicial_funcionario.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final _emailController = TextEditingController();
+  final _senhaController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           title: Text("Fazer Login"),
         ),
@@ -36,6 +46,7 @@ class Login extends StatelessWidget {
                     height: 45.0,
                   ),
                   TextFormField(
+                    controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     validator: (text) {
                       if (text.isEmpty || !text.contains("@"))
@@ -52,6 +63,7 @@ class Login extends StatelessWidget {
                     style: TextStyle(color: Colors.indigo),
                   ),
                   TextFormField(
+                    controller: _senhaController,
                     decoration: InputDecoration(
                       labelText: "Senha",
                       labelStyle: TextStyle(
@@ -73,9 +85,15 @@ class Login extends StatelessWidget {
                     height: 80.0,
                     child: RaisedButton(
                       onPressed: () {
-                        if (_formKey.currentState.validate()) {}
+                        if (_formKey.currentState.validate()) {
 
-                          model.signIn();
+                        }
+                        model.signIn(
+                            email: _emailController.text,
+                            pass: _senhaController.text,
+                            onSuccess: _onSuccess,
+                            onFail: _onFail
+                        );
                       },
                       child: Text(
                         "ENTRAR",
@@ -114,4 +132,19 @@ class Login extends StatelessWidget {
         )
     );
   }
+
+  void _onSuccess() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => MenuInicialFuncionario()));
+  }
+
+  void _onFail() {
+    _scaffoldKey.currentState.showSnackBar(
+        SnackBar(content: Text("Falha ao Entrar!"),
+          backgroundColor: Colors.redAccent,
+          duration: Duration(seconds: 3),
+        )
+    );
+  }
 }
+
