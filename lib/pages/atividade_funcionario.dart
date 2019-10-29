@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:p_integrador/model/usuario_model.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
+import 'cadastro_atividade.dart';
 
 class AtividadeFuncionario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: VoiceImageAsset(),
+        title: ScopedModelDescendant<UsuarioModel>(
+          builder: (context, child, model) {
+            return Text(
+              "Olá, ${!model.isLoggedIn() ? "" : model.userData["nome"]}",
+              style: TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            );
+          },
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(5.0),
@@ -31,7 +44,11 @@ class AtividadeFuncionario extends StatelessWidget {
             ButtonTheme(
               height: 130.0,
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(
+                          builder: (context) => CadastroAtividade()));
+                },
                 child: Text(
                   "Cadastrar Atividade",
                   style: TextStyle(
@@ -79,13 +96,5 @@ class AtividadeFuncionario extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-class VoiceImageAsset extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    AssetImage assetImage = AssetImage('images/voice.png');
-    Image image = Image(image: assetImage, width: 95.0, height: 95.0,);
-    return Container(child: image,);
   }
 }
