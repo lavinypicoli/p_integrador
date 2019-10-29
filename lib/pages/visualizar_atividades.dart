@@ -5,10 +5,9 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
 import 'cadastro_atividade.dart';
-import 'editar_avisos.dart';
 import 'menu_inicial_funcionario.dart';
 
-class AvisoFuncionario extends StatelessWidget {
+class VisualizarAtividade extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,50 +32,12 @@ class AvisoFuncionario extends StatelessWidget {
           children: <Widget>[
             Center(
               child: Text(
-                'AVISOS',
+                'Visualizar Atividades',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 30.0,
-                    color: Colors.lightBlue,
+                    color: Colors.deepOrange,
                     fontWeight: FontWeight.bold),
-              ),
-            ),
-            ButtonTheme(
-              height: 130.0,
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PublicarAvisos()));
-                },
-                child: Text(
-                  "Publicar Avisos",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30.0,
-                  ),
-                ),
-                color: Colors.lightGreen,
-              ),
-            ),
-            ButtonTheme(
-              height: 130.0,
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EditarAvisos()));
-                },
-                child: Text(
-                  "Editar Publicados",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30.0,
-                  ),
-                ),
-                color: Colors.orangeAccent,
               ),
             ),
             ButtonTheme(
