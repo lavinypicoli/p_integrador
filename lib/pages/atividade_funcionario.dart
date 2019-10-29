@@ -4,6 +4,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
 import 'cadastro_atividade.dart';
+import 'menu_inicial_funcionario.dart';
 
 class AtividadeFuncionario extends StatelessWidget {
   @override
@@ -80,7 +81,8 @@ class AtividadeFuncionario extends StatelessWidget {
               child: RaisedButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyApp()));
+                      MaterialPageRoute(
+                          builder: (context) => MenuInicialFuncionario()));
                 },
                 child: Text(
                   "Voltar ao Menu Inicial",

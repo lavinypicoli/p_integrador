@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/model/usuario_model.dart';
+import 'package:p_integrador/pages/publicar_avisos.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
-import 'atividade_funcionario.dart';
-import 'aviso_funcionario.dart';
+import 'cadastro_atividade.dart';
+import 'menu_inicial_funcionario.dart';
 
-class MenuInicialFuncionario extends StatelessWidget {
+class AvisoFuncionario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,6 @@ class MenuInicialFuncionario extends StatelessWidget {
             );
           },
         ),
-
       ),
       body: Padding(
         padding: EdgeInsets.all(5.0),
@@ -32,78 +32,58 @@ class MenuInicialFuncionario extends StatelessWidget {
           children: <Widget>[
             Center(
               child: Text(
-                'MENU INICIAL',
+                'AVISOS',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 30.0,
-                  color: Colors.red,
-                    fontWeight: FontWeight.bold
-                ),
-              ),
-            ),
-            ButtonTheme(
-              height: 100.0,
-              child: RaisedButton(
-                onPressed: () {},
-                child: Text(
-                  "Meus Dados",
-                  style: TextStyle(
-                    color: Colors.white,
                     fontSize: 30.0,
-                  ),
-                ),
-                color: Colors.yellow,
+                    color: Colors.lightBlue,
+                    fontWeight: FontWeight.bold),
               ),
             ),
-
             ButtonTheme(
-              height: 100.0,
+              height: 130.0,
               child: RaisedButton(
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AtividadeFuncionario())
-                  );
-                },
-                child: Text(
-                  "Atividade",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30.0,
-                  ),
-                ),
-                color: Colors.purple,
-              ),
-            ),
-
-            ButtonTheme(
-              height: 100.0,
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.push(context,
                       MaterialPageRoute(
-                          builder: (context) => AvisoFuncionario()));
+                          builder: (context) => PublicarAvisos()));
                 },
                 child: Text(
-                  "Aviso",
+                  "Publicar Avisos",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30.0,
                   ),
                 ),
-                color: Colors.lightBlue,
+                color: Colors.lightGreen,
               ),
             ),
-
+            ButtonTheme(
+              height: 130.0,
+              child: RaisedButton(
+                onPressed: () {},
+                child: Text(
+                  "Editar Publicados",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30.0,
+                  ),
+                ),
+                color: Colors.orangeAccent,
+              ),
+            ),
             ButtonTheme(
               height: 80.0,
               child: RaisedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyApp()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MenuInicialFuncionario()));
                 },
                 child: Text(
-                  "SAIR",
+                  "Voltar ao Menu Inicial",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30.0,
@@ -118,4 +98,3 @@ class MenuInicialFuncionario extends StatelessWidget {
     );
   }
 }
-
