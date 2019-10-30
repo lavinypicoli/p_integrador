@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/model/usuario_model.dart';
-import 'package:p_integrador/pages%20-%20aluno/login_aluno.dart';
+import 'package:p_integrador/pages/pagina_inicial.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
-import 'menu_inicial_funcionario.dart';
+import 'menu_inicial_aluno.dart';
 
-class Login extends StatefulWidget {
+class LoginAluno extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _LoginAlunoState createState() => _LoginAlunoState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginAlunoState extends State<LoginAluno> {
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
 
@@ -27,8 +27,10 @@ class _LoginState extends State<Login> {
         ),
         body: ScopedModelDescendant<UsuarioModel>(
           builder: (context, child, model) {
-            if(model.isLoading)
-              return Center(child: CircularProgressIndicator(),);
+            if (model.isLoading)
+              return Center(
+                child: CircularProgressIndicator(),
+              );
 
             return Form(
               key: _formKey,
@@ -80,21 +82,17 @@ class _LoginState extends State<Login> {
                     style: TextStyle(color: Colors.indigo),
                   ),
                   SizedBox(
-                    height: 30.0,
+                    height: 120.0,
                   ),
                   ButtonTheme(
                     height: 80.0,
                     child: RaisedButton(
                       onPressed: () {
-                        if (_formKey.currentState.validate()) {
-
-                        }
-                        model.signIn(
-                            email: _emailController.text,
-                            pass: _senhaController.text,
-                            onSuccess: _onSuccess,
-                            onFail: _onFail
-                        );
+                        if (_formKey.currentState.validate()) {}
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MenuInicialAluno()));
                       },
                       child: Text(
                         "ENTRAR",
@@ -113,8 +111,10 @@ class _LoginState extends State<Login> {
                     height: 80.0,
                     child: RaisedButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MyApp()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PaginaInicial()));
                       },
                       child: Text(
                         "VOLTAR",
@@ -129,44 +129,23 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  ButtonTheme(
-                    height: 50.0,
-                    child: RaisedButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginAluno()));
-                      },
-                      child: Text(
-                        "Aluno",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      color: Colors.grey,
-                    ),
-                  ),
                 ],
               ),
             );
           },
-        )
-    );
+        ));
   }
 
   void _onSuccess() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => MenuInicialFuncionario()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => PaginaInicial()));
   }
 
   void _onFail() {
-    _scaffoldKey.currentState.showSnackBar(
-        SnackBar(content: Text("Falha ao Entrar!"),
-          backgroundColor: Colors.redAccent,
-          duration: Duration(seconds: 3),
-        )
-    );
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("Falha ao Entrar!"),
+      backgroundColor: Colors.redAccent,
+      duration: Duration(seconds: 3),
+    ));
   }
 }
-
