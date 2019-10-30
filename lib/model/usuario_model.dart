@@ -102,5 +102,4 @@ class UsuarioModel extends Model{
     notifyListeners();
   }
 
-
 }
