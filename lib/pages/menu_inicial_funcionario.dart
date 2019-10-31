@@ -56,7 +56,7 @@ class MenuInicialFuncionario extends StatelessWidget {
                           fontSize: 30.0,
                         ),
                       ),
-                      color: Colors.yellow,
+                      color: Colors.teal[600],
                     ),
                   ),
 
