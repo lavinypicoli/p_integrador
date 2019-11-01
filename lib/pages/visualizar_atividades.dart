@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/controller/atividade_controller.dart';
 import 'package:p_integrador/model/usuario_model.dart';
-import 'package:p_integrador/pages/publicar_avisos.dart';
 import 'package:scoped_model/scoped_model.dart';
-
-import '../main.dart';
 import 'cadastro_atividade.dart';
-import 'menu_inicial_funcionario.dart';
+
 
 class VisualizarAtividade extends StatefulWidget {
   @override
@@ -15,17 +12,14 @@ class VisualizarAtividade extends StatefulWidget {
 
 class _VisualizarAtividadeState extends State<VisualizarAtividade> {
   AtividadeController controller = AtividadeController();
+
   List<Atividade> atividades = List();
 
 
   @override
   void initState() {
     super.initState();
-    controller.getAllAtividade().then((list) {
-      setState(() {
-        atividades = list;
-      });
-    });
+    _getAllAtividades();
   }
 
   @override
@@ -43,6 +37,13 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
             );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showAtividadePage();
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue,
       ),
       body:
       ListView.builder(
@@ -98,8 +99,77 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
           ),
         ),
       ),
+      onTap: () {
+        _showOptions(context, index);
+      },
     );
   }
+
+  void _showOptions(BuildContext context, int index) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return BottomSheet(
+            onClosing: () {},
+            builder: (context) {
+              return Container(
+                padding: EdgeInsets.all(5.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    FlatButton(
+                      child: Text("Editar",
+                        style: TextStyle(color: Colors.orange, fontSize: 40.0),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _showAtividadePage(atividade: atividades[index]);
+                      },
+                    ),
+                    FlatButton(
+                      child: Text("Excluir",
+                        style: TextStyle(color: Colors.red, fontSize: 40.0),
+                      ),
+                      onPressed: () {
+                        controller.deleteAtividade(
+                            atividades[index].idAtividade);
+                        setState(() {
+                          atividades.removeAt(index);
+                          Navigator.pop(context);
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        }
+    );
+  }
+
+  void _showAtividadePage({Atividade atividade}) async {
+    final recAtividade = await Navigator.push(context,
+        MaterialPageRoute(
+            builder: (context) => CadastroAtividade(atividade: atividade,)));
+    if (recAtividade != null) {
+      if (atividade != null) {
+        var i = await controller.updateAtividade(recAtividade);
+      } else {
+        await controller.saveAtividade(recAtividade);
+      }
+      _getAllAtividades();
+    }
+  }
+
+  void _getAllAtividades() {
+    controller.getAllAtividade().then((list) {
+      setState(() {
+        atividades = list;
+      });
+    });
+  }
+
 }
 
 

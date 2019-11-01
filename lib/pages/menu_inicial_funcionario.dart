@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/model/usuario_model.dart';
 import 'package:p_integrador/pages/pagina_inicial.dart';
+import 'package:p_integrador/pages/visualizar_atividades.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
@@ -67,7 +68,7 @@ class MenuInicialFuncionario extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AtividadeFuncionario())
+                                builder: (context) => VisualizarAtividade())
                         );
                       },
                       child: Text(
