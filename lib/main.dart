@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       model: UsuarioModel(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: MenuInicialFuncionario(),
+          home: PaginaInicial(),
         ),
     );
   }

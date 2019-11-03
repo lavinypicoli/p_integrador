@@ -104,7 +104,7 @@ class MenuInicialAluno extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => VisualizarAvisos()));
+                            builder: (context) => VisualizarAvisosAluno()));
                   },
                   child: Text(
                     "Aviso",

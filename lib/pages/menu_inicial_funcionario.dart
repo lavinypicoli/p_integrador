@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/model/usuario_model.dart';
 import 'package:p_integrador/model/usuario_model.dart' as prefix0;
-import 'package:p_integrador/pages%20-%20aluno/visualizar_avisos.dart';
 import 'package:p_integrador/pages/pagina_inicial.dart';
+import 'package:p_integrador/pages/visualizarAvisos.dart';
 import 'package:p_integrador/pages/visualizar_atividades.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
-import 'atividade_funcionario.dart';
-import 'aviso_funcionario.dart';
 import 'login.dart';
 import 'meus_dados_funcionario.dart';
 

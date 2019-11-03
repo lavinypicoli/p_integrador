@@ -6,7 +6,7 @@ import 'package:scoped_model/scoped_model.dart';
 import '../main.dart';
 import 'menu_inicial_aluno.dart';
 
-class VisualizarAvisos extends StatelessWidget {
+class VisualizarAvisosAluno extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
