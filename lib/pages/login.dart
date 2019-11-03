@@ -35,11 +35,9 @@ class _LoginState extends State<Login> {
               child: ListView(
                 padding: EdgeInsets.all(5.0),
                 children: <Widget>[
-                  Text(
-                    'Preencha os dois campos abaixo para Entrar!',
+                  Text('Preencha os dois campos abaixo para Entrar!',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 30,
+                    style: TextStyle(fontSize: 30,
                         color: Colors.indigo,
                         fontWeight: FontWeight.bold),
                   ),
@@ -53,10 +51,8 @@ class _LoginState extends State<Login> {
                       if (text.isEmpty || !text.contains("@"))
                         return "E-mail inválido!";
                     },
-                    decoration: InputDecoration(
-                      labelText: "E-mail",
-                      labelStyle: TextStyle(
-                          color: Colors.black,
+                    decoration: InputDecoration(labelText: "E-mail",
+                      labelStyle: TextStyle(color: Colors.black,
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold),
                     ),
@@ -65,10 +61,8 @@ class _LoginState extends State<Login> {
                   ),
                   TextFormField(
                     controller: _senhaController,
-                    decoration: InputDecoration(
-                      labelText: "Senha",
-                      labelStyle: TextStyle(
-                          color: Colors.black,
+                    decoration: InputDecoration(labelText: "Senha",
+                      labelStyle: TextStyle(color: Colors.black,
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold),
                     ),
@@ -87,7 +81,6 @@ class _LoginState extends State<Login> {
                     child: RaisedButton(
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
-
                         }
                         model.signIn(
                             email: _emailController.text,
@@ -96,11 +89,8 @@ class _LoginState extends State<Login> {
                             onFail: _onFail
                         );
                       },
-                      child: Text(
-                        "ENTRAR",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30.0,
+                      child: Text("ENTRAR",
+                        style: TextStyle(color: Colors.white, fontSize: 30.0,
                         ),
                       ),
                       color: Colors.green,
@@ -113,14 +103,11 @@ class _LoginState extends State<Login> {
                     height: 80.0,
                     child: RaisedButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MyApp()));
+                        Navigator.push(context, MaterialPageRoute(builder: (
+                            context) => MyApp()));
                       },
-                      child: Text(
-                        "VOLTAR",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30.0,
+                      child: Text("VOLTAR",
+                        style: TextStyle(color: Colors.white, fontSize: 30.0,
                         ),
                       ),
                       color: Colors.red,
@@ -133,16 +120,11 @@ class _LoginState extends State<Login> {
                     height: 50.0,
                     child: RaisedButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginAluno()));
+                        Navigator.push(context, MaterialPageRoute(builder: (
+                            context) => LoginAluno()));
                       },
-                      child: Text(
-                        "Aluno",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30.0,
-                        ),
+                      child: Text("Aluno",
+                        style: TextStyle(color: Colors.white, fontSize: 30.0),
                       ),
                       color: Colors.grey,
                     ),

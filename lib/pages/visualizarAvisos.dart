@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:p_integrador/controller/atividade_controller.dart';
+import 'package:p_integrador/controller/aviso_controller.dart';
 import 'package:p_integrador/model/usuario_model.dart';
+import 'package:p_integrador/pages/publicar_avisos.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'cadastro_atividade.dart';
 
-
-class VisualizarAtividade extends StatefulWidget {
+class VisualizarAvisos extends StatefulWidget {
   @override
-  _VisualizarAtividadeState createState() => _VisualizarAtividadeState();
+  _VisualizarAvisosState createState() => _VisualizarAvisosState();
 }
 
-class _VisualizarAtividadeState extends State<VisualizarAtividade> {
-  AtividadeController controller = AtividadeController();
+class _VisualizarAvisosState extends State<VisualizarAvisos> {
+  AvisoController controller = AvisoController();
 
-  List<Atividade> atividades = List();
+  List<Aviso> avisos = List();
 
   @override
   void initState() {
     super.initState();
-    _getAllAtividades();
+    _getAllAvisos();
   }
 
   @override
@@ -28,8 +27,9 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
         title: ScopedModelDescendant<UsuarioModel>(
           builder: (context, child, model) {
             return Text(
-              "Olá, ${!model.isLoggedIn() ? "" : model.userData["nome"]}",
-                style: TextStyle(fontSize: 15.0,
+                "Olá, ${!model.isLoggedIn() ? "" : model.userData["nome"]}",
+                style: TextStyle(
+                    fontSize: 15.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold));
           },
@@ -37,22 +37,22 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _showAtividadePage();
+          _showAvisoPage();
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
       ),
       body: ListView.builder(
-          padding: EdgeInsets.all(5.0),
-          itemCount: atividades.length,
-          itemBuilder: (context, index) {
-            return _atividadeCard(context, index);
-          }
+        padding: EdgeInsets.all(5.0),
+        itemCount: avisos.length,
+        itemBuilder: (context, index) {
+          return _avisoCard(context, index);
+        },
       ),
     );
   }
 
-  Widget _atividadeCard(BuildContext context, int index) {
+  Widget _avisoCard(BuildContext context, int index) {
     return GestureDetector(
       child: Card(
         child: Padding(
@@ -64,19 +64,16 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(atividades[index].nomeAtividade ?? "",
+                    Text(avisos[index].textopubli ?? "",
                         style: TextStyle(
-                            fontSize: 25.0, fontWeight: FontWeight.bold
-                        ),
-                        textAlign: TextAlign.left
-                    ),
-                    Text(atividades[index].diaSemana ?? "",
+                            fontSize: 25.0, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left),
+                    Text(
+                      avisos[index].diapubli ?? "",
                       style: TextStyle(fontSize: 20.0),
                     ),
-                    Text(atividades[index].horario ?? "",
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    Text(atividades[index].descricao ?? "",
+                    Text(
+                      avisos[index].horapubli ?? "",
                       style: TextStyle(fontSize: 20.0),
                     ),
                   ],
@@ -105,23 +102,24 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     FlatButton(
-                      child: Text("Editar",
+                      child: Text(
+                        "Editar",
                         style: TextStyle(color: Colors.orange, fontSize: 40.0),
                       ),
                       onPressed: () {
                         Navigator.pop(context);
-                        _showAtividadePage(atividade: atividades[index]);
+                        _showAvisoPage(aviso: avisos[index]);
                       },
                     ),
                     FlatButton(
-                      child: Text("Excluir",
+                      child: Text(
+                        "Excluir",
                         style: TextStyle(color: Colors.red, fontSize: 40.0),
                       ),
                       onPressed: () {
-                        controller.deleteAtividade(
-                            atividades[index].idAtividade);
+                        controller.deleteAviso(avisos[index].idAviso);
                         setState(() {
-                          atividades.removeAt(index);
+                          avisos.removeAt(index);
                           Navigator.pop(context);
                         });
                       },
@@ -131,32 +129,27 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
               );
             },
           );
-        }
-    );
+        });
   }
 
-  void _showAtividadePage({Atividade atividade}) async {
-    final recAtividade = await Navigator.push(context,
-        MaterialPageRoute(
-            builder: (context) => CadastroAtividade(atividade: atividade,)));
-    if (recAtividade != null) {
-      if (atividade != null) {
-        var i = await controller.updateAtividade(recAtividade);
+  void _showAvisoPage({Aviso aviso}) async {
+    final recAviso = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => PublicarAvisos(aviso: aviso)));
+    if (recAviso != null) {
+      if (aviso != null) {
+        var i = await controller.updateAviso(recAviso);
       } else {
-        await controller.saveAtividade(recAtividade);
+        await controller.saveAviso(recAviso);
       }
-      _getAllAtividades();
+      _getAllAvisos();
     }
   }
 
-  void _getAllAtividades() {
-    controller.getAllAtividade().then((list) {
+  void _getAllAvisos() {
+    controller.getAllAviso().then((list) {
       setState(() {
-        atividades = list;
+        avisos = list;
       });
     });
   }
-
 }
-
-

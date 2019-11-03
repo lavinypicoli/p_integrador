@@ -4,9 +4,9 @@ import 'package:p_integrador/pages/publicar_avisos.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
-import 'menu_inicial_aluno.dart';
+import 'menu_inicial_funcionario.dart';
 
-class MeusDados extends StatelessWidget {
+class MeusDadosFuncionario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +35,7 @@ class MeusDados extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 30.0,
-                    color: Colors.yellow,
+                    color: Colors.teal[600],
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -46,14 +46,11 @@ class MeusDados extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MenuInicialAluno()));
+                          builder: (context) => MenuInicialFuncionario()));
                 },
                 child: Text(
                   "Voltar ao Menu Inicial",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30.0,
-                  ),
+                  style: TextStyle(color: Colors.white, fontSize: 30.0),
                 ),
                 color: Colors.red,
               ),

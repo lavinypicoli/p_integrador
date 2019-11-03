@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/controller/atividade_controller.dart';
+import 'package:p_integrador/controller/aviso_controller.dart';
 
 class Teste extends StatefulWidget {
   @override
@@ -7,13 +8,23 @@ class Teste extends StatefulWidget {
 }
 
 class _TesteState extends State<Teste> {
-  AtividadeController controller = AtividadeController();
+  // AtividadeController controller = AtividadeController();
+  AvisoController controller = AvisoController();
 
   @override
   void initState() {
     super.initState();
 
-    Atividade atividade = Atividade();
+    Aviso aviso = Aviso();
+    aviso.textopubli = "Aula cancelada";
+    aviso.diapubli = "segunda";
+
+    var saveAviso = controller.saveAviso(aviso);
+    var then = controller.getAllAviso().then((list) {
+      print(list);
+    });
+
+    /*Atividade atividade = Atividade();
     atividade.nomeAtividade = "Laviny";
     atividade.diaSemana = "Terça";
 
@@ -21,6 +32,7 @@ class _TesteState extends State<Teste> {
     var then = controller.getAllAtividade().then((list) {
       print(list);
     });
+    */
   }
 
   @override

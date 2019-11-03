@@ -65,6 +65,7 @@ class AtividadeController {
     }
   }
 
+
   Future<int> deleteAtividade(int id) async {
     Database dbAtividade = await db;
     return await dbAtividade

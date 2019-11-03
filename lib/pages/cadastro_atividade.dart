@@ -58,8 +58,7 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
             builder: (context, child, model) {
               return Text(
                 "Olá, ${!model.isLoggedIn() ? "" : model.userData["nome"]}",
-                style: TextStyle(
-                    fontSize: 15.0,
+                style: TextStyle(fontSize: 15.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               );
@@ -73,8 +72,7 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
               Text(
                 'Preencha os quatro campos abaixo para cadastrar uma nova atividade',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 20.0,
+                style: TextStyle(fontSize: 20.0,
                     color: Colors.indigo,
                     fontWeight: FontWeight.bold),
               ),
@@ -83,10 +81,8 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
               ),
               TextFormField(
                 controller: _nomeAtividadeController,
-                decoration: InputDecoration(
-                  labelText: "Nome da Atividade",
-                  labelStyle: TextStyle(
-                      color: Colors.black,
+                decoration: InputDecoration(labelText: "Nome da Atividade",
+                  labelStyle: TextStyle(color: Colors.black,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold),
                 ),
@@ -99,10 +95,8 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
               ),
               TextFormField(
                 controller: _diaSemanaController,
-                decoration: InputDecoration(
-                  labelText: "Dia da Semana",
-                  labelStyle: TextStyle(
-                      color: Colors.black,
+                decoration: InputDecoration(labelText: "Dia da Semana",
+                  labelStyle: TextStyle(color: Colors.black,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold),
                 ),
@@ -115,10 +109,8 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
               ),
               TextFormField(
                 controller: _horarioController,
-                decoration: InputDecoration(
-                  labelText: "Horário",
-                  labelStyle: TextStyle(
-                      color: Colors.black,
+                decoration: InputDecoration(labelText: "Horário",
+                  labelStyle: TextStyle(color: Colors.black,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold),
                 ),
@@ -131,10 +123,8 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
               ),
               TextFormField(
                 controller: _descricaoController,
-                decoration: InputDecoration(
-                  labelText: "Descrição da Atividade",
-                  labelStyle: TextStyle(
-                      color: Colors.black,
+                decoration: InputDecoration(labelText: "Descrição da Atividade",
+                  labelStyle: TextStyle(color: Colors.black,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold),
                 ),
@@ -156,12 +146,8 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
                       Navigator.pop(context, _editedAtividade);
                     }
                   },
-                  child: Text(
-                    "CADASTRAR",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                    ),
+                  child: Text("CADASTRAR",
+                    style: TextStyle(color: Colors.white, fontSize: 30.0),
                   ),
                   color: Colors.blue,
                 ),
@@ -176,12 +162,8 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
                     Navigator.push(context, MaterialPageRoute(
                         builder: (context) => MenuInicialFuncionario()));
                   },
-                  child: Text(
-                    "Voltar ao Menu Inicial",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                    ),
+                  child: Text("Voltar ao Menu Inicial",
+                    style: TextStyle(color: Colors.white, fontSize: 30.0),
                   ),
                   color: Colors.red,
                 ),
@@ -195,8 +177,7 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
 
   Future<bool> _requestPop() async {
     if (_userEdited) {
-      showDialog(context: context,
-          builder: (context) {
+      showDialog(context: context, builder: (context) {
             return AlertDialog(
               title: Text("Deseja mesmo descartar as alterações?"),
               content: Text("Se sair as alterações serão perdidas."),

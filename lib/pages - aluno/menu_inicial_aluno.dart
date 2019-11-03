@@ -6,7 +6,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'buscar_atividade.dart';
 import 'login_aluno.dart';
-import 'meus_dados.dart';
+import 'meus_dados_aluno.dart';
 import 'minha_agenda.dart';
 
 class MenuInicialAluno extends StatelessWidget {
@@ -58,7 +58,7 @@ class MenuInicialAluno extends StatelessWidget {
                       fontSize: 30.0,
                     ),
                   ),
-                  color: Colors.yellow,
+                  color: Colors.teal[600],
                 ),
               ),
               ButtonTheme(
