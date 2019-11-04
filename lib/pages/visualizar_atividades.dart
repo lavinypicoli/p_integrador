@@ -3,6 +3,7 @@ import 'package:p_integrador/controller/atividade_controller.dart';
 import 'package:p_integrador/model/usuario_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'cadastro_atividade.dart';
+import 'menu_inicial_funcionario.dart';
 
 
 class VisualizarAtividade extends StatefulWidget {
@@ -35,13 +36,17 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           _showAtividadePage();
         },
-        child: Icon(Icons.add),
+        label: Text('Cadastrar nova atividade',
+          style: TextStyle(fontSize: 24.0, color: Colors.white),
+        ),
+        shape: RoundedRectangleBorder(),
         backgroundColor: Colors.blue,
       ),
+
       body: ListView.builder(
           padding: EdgeInsets.all(5.0),
           itemCount: atividades.length,
@@ -49,6 +54,7 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
             return _atividadeCard(context, index);
           }
       ),
+
     );
   }
 

@@ -18,31 +18,21 @@ class PaginaInicial extends StatelessWidget {
           children: <Widget>[
             VoiceImageAsset(),
             Center(
-              child:  Text(
-                'Bem-vindo(a) ao Voice!',
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.indigo,
-                    fontWeight: FontWeight.bold
-                ),
-              ),
+              child: Text('Bem-vindo(a) ao Voice!',
+                  style: TextStyle(fontSize: 30,
+                      color: Colors.indigo,
+                      fontWeight: FontWeight.bold)),
             ),
 
             ButtonTheme(
               height: 80.0,
               child: RaisedButton(
                 onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Login())
-                  );
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Login()));
                 },
-                child: Text(
-                  "FAZER LOGIN",
-                  style: TextStyle(
-                    color: Colors.white, fontSize: 30.0,
-                  ),
-                ),
+                child: Text("FAZER LOGIN",
+                    style: TextStyle(color: Colors.white, fontSize: 30.0)),
                 color: Colors.green,
               ),
             ),
@@ -50,16 +40,12 @@ class PaginaInicial extends StatelessWidget {
               height: 80.0,
               child: RaisedButton(
                 onPressed: (){
-                  Navigator.push(
-                      context,
+                  Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Cadastro())
                   );
                 },
-                child: Text(
-                  "EFETUAR CADASTRO",
-                  style: TextStyle(
-                    color: Colors.white, fontSize: 30.0,
-                  ),
+                child: Text("EFETUAR CADASTRO",
+                  style: TextStyle(color: Colors.white, fontSize: 30.0),
                 ),
                 color: Colors.blue,
               ),

@@ -35,12 +35,15 @@ class _VisualizarAvisosState extends State<VisualizarAvisos> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           _showAvisoPage();
         },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.blue,
+        label: Text('Publicar novo aviso',
+          style: TextStyle(fontSize: 32.0, color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+        shape: RoundedRectangleBorder(),
       ),
       body: ListView.builder(
         padding: EdgeInsets.all(5.0),

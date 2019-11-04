@@ -20,11 +20,9 @@ class MenuInicialAluno extends StatelessWidget {
             builder: (context, child, model) {
               return Text(
                 "Olá, ${!model.isLoggedIn() ? "" : model.userData["nome"]}",
-                style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              );
+                  style: TextStyle(fontSize: 15.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold));
             },
           ),
         ),
@@ -38,11 +36,9 @@ class MenuInicialAluno extends StatelessWidget {
                 child: Text(
                   'MENU INICIAL',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold),
-                ),
+                    style: TextStyle(fontSize: 30.0,
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold)),
               ),
               ButtonTheme(
                 height: 90.0,
@@ -53,11 +49,7 @@ class MenuInicialAluno extends StatelessWidget {
                   },
                   child: Text(
                     "Meus Dados",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                    ),
-                  ),
+                      style: TextStyle(color: Colors.white, fontSize: 30.0)),
                   color: Colors.teal[600],
                 ),
               ),
@@ -65,15 +57,12 @@ class MenuInicialAluno extends StatelessWidget {
                 height: 90.0,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MinhaAgenda()));
+                    Navigator.push(context, MaterialPageRoute(builder: (
+                        context) => MinhaAgenda()));
                   },
                   child: Text(
                     "Minha Agenda",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                    ),
+                    style: TextStyle(color: Colors.white, fontSize: 30.0),
                   ),
                   color: Colors.pink[800],
                 ),
@@ -82,17 +71,12 @@ class MenuInicialAluno extends StatelessWidget {
                 height: 90.0,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BuscarAtividade()));
+                    Navigator.push(context, MaterialPageRoute(builder: (
+                        context) => BuscarAtividade()));
                   },
                   child: Text(
                     "Buscar Atividade",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                    ),
+                    style: TextStyle(color: Colors.white, fontSize: 30.0),
                   ),
                   color: Colors.deepPurple,
                 ),
@@ -101,17 +85,12 @@ class MenuInicialAluno extends StatelessWidget {
                 height: 90.0,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => VisualizarAvisosAluno()));
+                    Navigator.push(context, MaterialPageRoute(builder: (
+                        context) => VisualizarAvisosAluno()));
                   },
                   child: Text(
                     "Aviso",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                    ),
+                    style: TextStyle(color: Colors.white, fontSize: 30.0),
                   ),
                   color: Colors.lightBlue,
                 ),
@@ -121,24 +100,16 @@ class MenuInicialAluno extends StatelessWidget {
                 child: RaisedButton(
                   onPressed: () {
                     if (!model.isLoggedIn())
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginAluno()));
+                      Navigator.push(context, MaterialPageRoute(builder: (
+                          context) => LoginAluno()));
                     else
                       model.signOut();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PaginaInicial()));
+                    Navigator.push(context, MaterialPageRoute(builder: (
+                        context) => PaginaInicial()));
                   },
                   child: Text(
                     "SAIR",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                    ),
-                  ),
+                      style: TextStyle(color: Colors.white, fontSize: 30.0)),
                   color: Colors.red,
                 ),
               ),
