@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:p_integrador/controller/aviso_controller.dart';
 import 'package:p_integrador/model/usuario_model.dart';
 import 'package:p_integrador/pages/publicar_avisos.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -10,14 +9,11 @@ class VisualizarAvisos extends StatefulWidget {
 }
 
 class _VisualizarAvisosState extends State<VisualizarAvisos> {
-  AvisoController controller = AvisoController();
-
-  List<Aviso> avisos = List();
 
   @override
   void initState() {
     super.initState();
-    _getAllAvisos();
+    // _getAllAvisos();
   }
 
   @override
@@ -37,7 +33,8 @@ class _VisualizarAvisosState extends State<VisualizarAvisos> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          _showAvisoPage();
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => PublicarAvisos()));
         },
         label: Text('Publicar novo aviso',
           style: TextStyle(fontSize: 32.0, color: Colors.white),
@@ -45,13 +42,15 @@ class _VisualizarAvisosState extends State<VisualizarAvisos> {
         backgroundColor: Colors.green,
         shape: RoundedRectangleBorder(),
       ),
-      body: ListView.builder(
+
+      /*  body: ListView.builder(
         padding: EdgeInsets.all(5.0),
         itemCount: avisos.length,
         itemBuilder: (context, index) {
           return _avisoCard(context, index);
         },
-      ),
+      ),*/
+
     );
   }
 
@@ -67,6 +66,7 @@ class _VisualizarAvisosState extends State<VisualizarAvisos> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    /*
                     Text(avisos[index].textopubli ?? "",
                         style: TextStyle(
                             fontSize: 25.0, fontWeight: FontWeight.bold),
@@ -79,6 +79,8 @@ class _VisualizarAvisosState extends State<VisualizarAvisos> {
                       avisos[index].horapubli ?? "",
                       style: TextStyle(fontSize: 20.0),
                     ),
+              */
+
                   ],
                 ),
               )
@@ -101,7 +103,7 @@ class _VisualizarAvisosState extends State<VisualizarAvisos> {
             builder: (context) {
               return Container(
                 padding: EdgeInsets.all(5.0),
-                child: Column(
+                /* child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     FlatButton(
@@ -129,12 +131,14 @@ class _VisualizarAvisosState extends State<VisualizarAvisos> {
                     ),
                   ],
                 ),
+           */
               );
             },
           );
         });
   }
 
+/*
   void _showAvisoPage({Aviso aviso}) async {
     final recAviso = await Navigator.push(context,
         MaterialPageRoute(builder: (context) => PublicarAvisos(aviso: aviso)));
@@ -155,4 +159,7 @@ class _VisualizarAvisosState extends State<VisualizarAvisos> {
       });
     });
   }
+*/
+
+
 }

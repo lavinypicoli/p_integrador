@@ -1,52 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:p_integrador/controller/aviso_controller.dart';
+import 'package:p_integrador/api/publicaAvisoAPI.dart';
+
 import 'package:p_integrador/model/usuario_model.dart';
+import 'package:p_integrador/pages/visualizarAvisos.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
 import 'menu_inicial_funcionario.dart';
 
 class PublicarAvisos extends StatefulWidget {
-  final Aviso aviso;
-
-  PublicarAvisos({this.aviso});
-
 
   @override
   _PublicarAvisosState createState() => _PublicarAvisosState();
 }
 
 class _PublicarAvisosState extends State<PublicarAvisos> {
-  Aviso aviso;
-  List<Aviso> avisos = List();
-  AvisoController controller = AvisoController();
 
-  final _textoController = TextEditingController();
-  final _diaController = TextEditingController();
-  final _horaController = TextEditingController();
-
-  bool _userEdited = false;
-
-  Aviso _editedAviso;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.aviso == null) {
-      _editedAviso = Aviso();
-    } else {
-      _editedAviso = Aviso.fromMap(widget.aviso.toMap());
-
-      _textoController.text = _editedAviso.textopubli;
-      _diaController.text = _editedAviso.diapubli;
-      _horaController.text = _editedAviso.horapubli;
-    }
-  }
+  final _textoaviso = TextEditingController();
+  final _dataaviso = TextEditingController();
+  final _horaaviso = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _requestPop,
+      //onWillPop: _requestPop,
       child: Scaffold(
         appBar: AppBar(
           title: ScopedModelDescendant<UsuarioModel>(
@@ -60,80 +38,73 @@ class _PublicarAvisosState extends State<PublicarAvisos> {
           ),
         ),
         body: Form(
+          key: _formKey,
           child: ListView(
             padding: EdgeInsets.all(5.0),
             children: <Widget>[
-              Text(
-                'Preencha os três campos abaixo para publicar um novo aviso',
+              Text('Preencha os três campos abaixo para publicar um novo aviso',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 20.0,
+                style: TextStyle(fontSize: 20.0,
                     color: Colors.indigo,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(
-                height: 15.0,
-              ),
+              SizedBox(height: 15.0),
               TextFormField(
-                controller: _textoController,
+                controller: _textoaviso,
                 decoration: InputDecoration(
-                  labelText: "Texto do Aviso",
-                  labelStyle: TextStyle(color: Colors.black,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold),
-                ),
-                onChanged: (text) {
-                  _userEdited = true;
-                  _editedAviso.textopubli = text;
-                },
+                    labelText: "Texto do Aviso",
+                    labelStyle: TextStyle(color: Colors.black,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold)),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.indigo),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
+              SizedBox(height: 10.0),
               TextFormField(
-                controller: _diaController,
+                controller: _dataaviso,
                 decoration: InputDecoration(
-                  labelText: "Dia da Publicação",
-                  labelStyle: TextStyle(color: Colors.black,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold),
-                ),
-                onChanged: (text) {
-                  _userEdited = true;
-                  _editedAviso.diapubli = text;
-                },
+                    labelText: "Dia da Publicação",
+                    labelStyle: TextStyle(color: Colors.black,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold)),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.indigo),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
+              SizedBox(height: 10.0),
               TextFormField(
-                controller: _horaController,
+                controller: _horaaviso,
                 decoration: InputDecoration(
                   labelText: "Horário Publicação",
                   labelStyle: TextStyle(color: Colors.black,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold),
                 ),
-                onChanged: (text) {
-                  _userEdited = true;
-                  _editedAviso.horapubli = text;
-                },
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.indigo),
               ),
-              SizedBox(
-                height: 35.0,
-              ),
+              SizedBox(height: 35.0),
               ButtonTheme(
                 height: 80.0,
                 child: RaisedButton(
-                  onPressed: () {
-                    if (_editedAviso.textopubli.isNotEmpty) {
-                      Navigator.pop(context, _editedAviso);
+                  onPressed: () async {
+                    bool formOk = _formKey.currentState.validate();
+                    if (!formOk) {
+                      //não chega até no botão se um campo tiver vazio
+                      return;
+                    }
+                    String textoaviso = _textoaviso.text;
+                    String dataaviso = _dataaviso.text;
+                    String horaaviso = _horaaviso.text;
+
+                    bool ok = await PublicaAvisoApi.publicaAviso(
+                        textoaviso, dataaviso, horaaviso);
+                    if (ok) {
+                      print("Aviso: $textoaviso, $dataaviso, $horaaviso");
+                      print("publicou aviso");
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => VisualizarAvisos()));
+                    } else {
+                      print("Não publicou aviso");
                     }
                   },
                   child: Text("PUBLICAR",
@@ -166,6 +137,7 @@ class _PublicarAvisosState extends State<PublicarAvisos> {
     );
   }
 
+/*
   Future<bool> _requestPop() async {
     if (_userEdited) {
       showDialog(context: context, builder: (context) {
@@ -195,5 +167,6 @@ class _PublicarAvisosState extends State<PublicarAvisos> {
       return Future.value(true);
     }
   }
+*/
 
 }

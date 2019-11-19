@@ -2,17 +2,18 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
-class CadastroAviso {
-  static Future<bool> cadastroAviso(
-      String textoaviso, String dataaviso, String horaaviso) async {
-    var url = 'http://192.168.0.8:8080/aviso/save';
+class CadastroAtividadeApi {
+  static Future<bool> cadastraAtividade(String nomeativ, String diaativ,
+      String horaativ, String descricaoativ) async {
+    var url = 'http://192.168.1.107:8080/atividade/save';
 
     Map<String, String> headers = {"Content-Type": "application/json"};
 
     Map params = {
-      "textoaviso": textoaviso,
-      "dataaviso": dataaviso,
-      "horaaviso": horaaviso
+      "nomeativ": nomeativ,
+      "diaativ": diaativ,
+      "horaativ": horaativ,
+      "descricaoativ": descricaoativ,
     };
 
     String s = jsonEncode(params);
@@ -21,7 +22,6 @@ class CadastroAviso {
 
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
-
     return true;
   }
 }

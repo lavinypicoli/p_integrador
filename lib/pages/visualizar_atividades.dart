@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:p_integrador/controller/atividade_controller.dart';
 import 'package:p_integrador/model/usuario_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'cadastro_atividade.dart';
@@ -12,14 +11,11 @@ class VisualizarAtividade extends StatefulWidget {
 }
 
 class _VisualizarAtividadeState extends State<VisualizarAtividade> {
-  AtividadeController controller = AtividadeController();
-
-  List<Atividade> atividades = List();
 
   @override
   void initState() {
     super.initState();
-    _getAllAtividades();
+    //  _getAllAtividades();
   }
 
   @override
@@ -38,7 +34,8 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          _showAtividadePage();
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CadastroAtividade()));
         },
         label: Text('Cadastrar nova atividade',
           style: TextStyle(fontSize: 24.0, color: Colors.white),
@@ -47,6 +44,7 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
         backgroundColor: Colors.blue,
       ),
 
+      /*
       body: ListView.builder(
           padding: EdgeInsets.all(5.0),
           itemCount: atividades.length,
@@ -54,7 +52,7 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
             return _atividadeCard(context, index);
           }
       ),
-
+    */
     );
   }
 
@@ -70,6 +68,8 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    /*
+
                     Text(atividades[index].nomeAtividade ?? "",
                         style: TextStyle(
                             fontSize: 25.0, fontWeight: FontWeight.bold
@@ -82,9 +82,12 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
                     Text(atividades[index].horario ?? "",
                       style: TextStyle(fontSize: 20.0),
                     ),
-                    Text(atividades[index].descricao ?? "",
+                    Text(   atividades[index].descricao ?? "",
                       style: TextStyle(fontSize: 20.0),
                     ),
+
+                 */
+
                   ],
                 ),
               )
@@ -93,11 +96,11 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
         ),
       ),
       onTap: () {
-        _showOptions(context, index);
+        // _showOptions(context, index);
       },
     );
   }
-
+/*
   void _showOptions(BuildContext context, int index) {
     showModalBottomSheet(
         context: context,
@@ -141,10 +144,10 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
     );
   }
 
+
   void _showAtividadePage({Atividade atividade}) async {
     final recAtividade = await Navigator.push(context,
-        MaterialPageRoute(
-            builder: (context) => CadastroAtividade(atividade: atividade,)));
+        MaterialPageRoute(builder: (context) => CadastroAtividade(atividade: atividade,)));
     if (recAtividade != null) {
       if (atividade != null) {
         var i = await controller.updateAtividade(recAtividade);
@@ -162,6 +165,7 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
       });
     });
   }
+*/
 
 }
 

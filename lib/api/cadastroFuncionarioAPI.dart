@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
-class CadastroFuncionario {
+class CadastroFuncionarioApi {
 
   static Future<bool> cadastraFuncionario(String nomefunc, String emailfunc,
       String senhafunc) async {
-    var url = 'http://192.168.0.8:8080/funcionario/save';
+    var url = 'http://127.0.0.1:8080/funcionario/save';
 
     Map<String, String> headers = {
       "Content-Type": "application/json"
