@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:p_integrador/api/cadastroAlunoAPI.dart';
 import 'package:p_integrador/model/usuario_model.dart';
+import 'package:p_integrador/pages/login.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'dart:async';
 import '../main.dart';
@@ -15,10 +17,10 @@ class _CadastroState extends State<Cadastro>{
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final _nomeController = TextEditingController();
-  final _datanascimentoController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _senhaController = TextEditingController();
+  final _nomealuno = TextEditingController();
+  final _datanasc = TextEditingController();
+  final _emailaluno = TextEditingController();
+  final _senhaaluno = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +29,7 @@ class _CadastroState extends State<Cadastro>{
         appBar: AppBar(
           title: Text("Cadastro de Aluno"),
         ),
-        body: ScopedModelDescendant<UsuarioModel>(
-          builder: (context, child, model) {
-            if(model.isLoading)
-              return Center(child: CircularProgressIndicator(),);
-
-            return Form(
+      body: Form(
               key: _formKey,
               child: ListView(
                 padding: EdgeInsets.all(5.0),
@@ -40,8 +37,7 @@ class _CadastroState extends State<Cadastro>{
                   Text(
                     'Preencha os quatro campos abaixo para efetuar o cadastro!',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20.0,
+                    style: TextStyle(fontSize: 20.0,
                         color: Colors.indigo,
                         fontWeight: FontWeight.bold),
                   ),
@@ -49,14 +45,12 @@ class _CadastroState extends State<Cadastro>{
                     height: 5.0,
                   ),
                   TextFormField(
-                    controller: _nomeController,
+                    controller: _nomealuno,
                     decoration: InputDecoration(
                       labelText: "Nome Completo",
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold),
-                    ),
+                        labelStyle: TextStyle(color: Colors.black,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold)),
                     validator: (text) {
                       if (text.isEmpty) return "Nome Completo inválido!";
                     },
@@ -64,14 +58,12 @@ class _CadastroState extends State<Cadastro>{
                     style: TextStyle(color: Colors.indigo),
                   ),
                   TextFormField(
-                    controller: _datanascimentoController,
+                    controller: _datanasc,
                     decoration: InputDecoration(
                       labelText: "Data de Nascimento",
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold),
-                    ),
+                        labelStyle: TextStyle(color: Colors.black,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold)),
                     validator: (text) {
                       if (text.isEmpty) return "Data de Nascimento inválida!";
                     },
@@ -79,7 +71,7 @@ class _CadastroState extends State<Cadastro>{
                     style: TextStyle(color: Colors.indigo),
                   ),
                   TextFormField(
-                    controller: _emailController,
+                    controller: _emailaluno,
                     keyboardType: TextInputType.emailAddress,
                     validator: (text) {
                       if (text.isEmpty || !text.contains("@"))
@@ -87,23 +79,19 @@ class _CadastroState extends State<Cadastro>{
                     },
                     decoration: InputDecoration(
                       labelText: "E-mail",
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold),
-                    ),
+                        labelStyle: TextStyle(color: Colors.black,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold)),
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.indigo),
                   ),
                   TextFormField(
-                    controller: _senhaController,
+                    controller: _senhaaluno,
                     decoration: InputDecoration(
                       labelText: "Senha",
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold),
-                    ),
+                        labelStyle: TextStyle(color: Colors.black,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold)),
                     validator: (text) {
                       if (text.isEmpty || text.length < 6)
                         return "Senha inválida!";
@@ -111,43 +99,43 @@ class _CadastroState extends State<Cadastro>{
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.indigo),
                   ),
-                  SizedBox(
-                    height: 25.0,
-                  ),
-
+                  SizedBox(height: 25.0),
                   ButtonTheme(
                     height: 70.0,
                     child: RaisedButton(
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          Map<String, dynamic> userData = {
-                            "nome": _nomeController.text,
-                            "data": _datanascimentoController.text,
-                            "email": _emailController.text
-                          };
-                          model.cadastroUsuario(
-                              userData: userData,
-                              pass: _senhaController.text,
-                              onSuccess: _onSuccess,
-                              onFail: _onFail
-                          );
+                      onPressed: () async {
+                        bool formOk = _formKey.currentState.validate();
+                        if (!formOk) {
+                          //não chega até no botão se um campo tiver vazio
+                          return;
+                        }
+                        String nomealuno = _nomealuno.text;
+                        String datanasc = _datanasc.text;
+                        String emailaluno = _emailaluno.text;
+                        String senhaaluno = _senhaaluno.text;
+
+                        bool ok = await CadastroAlunoApi.cadastroAluno(
+                            nomealuno, datanasc, emailaluno, senhaaluno);
+                        if (ok) {
+                          _onSuccess();
+                          print(
+                              "Aluno: $nomealuno, $datanasc, $emailaluno, $senhaaluno ");
+                          print("Cadastrou aluno");
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Login()));
+                        } else {
+                          _onFail();
+                          print("Não cadastrou aluno");
                         }
                       },
-                      child: Text(
-                        "CADASTRAR",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30.0,
-                        ),
+                      child: Text("CADASTRAR",
+                        style: TextStyle(color: Colors.white, fontSize: 30.0),
                       ),
                       color: Colors.blue,
                     ),
                   ),
 
-
-                  SizedBox(
-                    height: 10.0,
-                  ),
+                  SizedBox(height: 10.0),
                   ButtonTheme(
                     height: 70.0,
                     child: RaisedButton(
@@ -155,21 +143,15 @@ class _CadastroState extends State<Cadastro>{
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => MyApp()));
                       },
-                      child: Text(
-                        "VOLTAR",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30.0,
-                        ),
-                      ),
+                      child: Text("VOLTAR",
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 30.0)),
                       color: Colors.red,
                     ),
                   ),
                 ],
               ),
-            );
-          },
-        )
+      ),
     );
   }
 
@@ -180,10 +162,6 @@ class _CadastroState extends State<Cadastro>{
           duration: Duration(seconds: 2),
         )
     );
-    Future.delayed(Duration(seconds: 2)).then((_) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => MenuInicialFuncionario()));
-    });
   }
 
   void _onFail() {
