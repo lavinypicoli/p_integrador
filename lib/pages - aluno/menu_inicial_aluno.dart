@@ -5,7 +5,6 @@ import 'package:p_integrador/pages/pagina_inicial.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'buscar_atividade.dart';
-import 'login_aluno.dart';
 import 'meus_dados_aluno.dart';
 import 'minha_agenda.dart';
 
@@ -99,11 +98,6 @@ class MenuInicialAluno extends StatelessWidget {
                 height: 80.0,
                 child: RaisedButton(
                   onPressed: () {
-                    if (!model.isLoggedIn())
-                      Navigator.push(context, MaterialPageRoute(builder: (
-                          context) => LoginAluno()));
-                    else
-                      model.signOut();
                     Navigator.push(context, MaterialPageRoute(builder: (
                         context) => PaginaInicial()));
                   },

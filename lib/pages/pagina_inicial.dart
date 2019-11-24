@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p_integrador/pages/login_funcionario.dart';
 
 import 'cadastro_aluno.dart';
 import 'login.dart';
@@ -50,6 +51,20 @@ class PaginaInicial extends StatelessWidget {
                 color: Colors.blue,
               ),
             ),
+            ButtonTheme(
+              height: 70.0,
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => LoginFuncionario())
+                  );
+                },
+                child: Text("Área Restrita ao Funcionário",
+                  style: TextStyle(color: Colors.white, fontSize: 24.0),
+                ),
+                color: Colors.blueGrey[800],
+              ),
+            ),
           ],
         ),
       ),
@@ -61,7 +76,7 @@ class VoiceImageAsset extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AssetImage assetImage = AssetImage('images/voice.png');
-    Image image = Image(image: assetImage, width: 300.0, height: 300.0,);
+    Image image = Image(image: assetImage, width: 200.0, height: 200.0,);
     return Container(child: image,);
   }
 }

@@ -93,7 +93,7 @@ class _CadastroState extends State<Cadastro>{
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold)),
                     validator: (text) {
-                      if (text.isEmpty || text.length < 6)
+                      if (text.isEmpty || text.length < 3)
                         return "Senha inválida!";
                     },
                     textAlign: TextAlign.center,
@@ -117,12 +117,12 @@ class _CadastroState extends State<Cadastro>{
                         bool ok = await CadastroAlunoApi.cadastroAluno(
                             nomealuno, datanasc, emailaluno, senhaaluno);
                         if (ok) {
-                          _onSuccess();
                           print(
                               "Aluno: $nomealuno, $datanasc, $emailaluno, $senhaaluno ");
                           print("Cadastrou aluno");
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => Login()));
+                          //_onSuccess();
                         } else {
                           _onFail();
                           print("Não cadastrou aluno");
@@ -159,7 +159,7 @@ class _CadastroState extends State<Cadastro>{
     _scaffoldKey.currentState.showSnackBar(
         SnackBar(content: Text("Usuário criado com sucesso!"),
           backgroundColor: Colors.green,
-          duration: Duration(seconds: 2),
+          duration: Duration(seconds: 5),
         )
     );
   }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:p_integrador/model/usuario_model.dart';
-import 'package:p_integrador/pages%20-%20aluno/login_aluno.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:p_integrador/api/loginAlunoAPI.dart' as prefix0;
+import 'package:p_integrador/model/alunoModel.dart';
+import 'package:p_integrador/pages%20-%20aluno/menu_inicial_aluno.dart';
+
 
 import '../main.dart';
-import 'menu_inicial_funcionario.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -12,8 +12,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final _emailController = TextEditingController();
-  final _senhaController = TextEditingController();
+  final _emailAluno = TextEditingController();
+  final _senhaAluno = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -25,12 +25,7 @@ class _LoginState extends State<Login> {
         appBar: AppBar(
           title: Text("Fazer Login"),
         ),
-        body: ScopedModelDescendant<UsuarioModel>(
-          builder: (context, child, model) {
-            if(model.isLoading)
-              return Center(child: CircularProgressIndicator(),);
-
-            return Form(
+        body: Form(
               key: _formKey,
               child: ListView(
                 padding: EdgeInsets.all(5.0),
@@ -45,7 +40,7 @@ class _LoginState extends State<Login> {
                     height: 45.0,
                   ),
                   TextFormField(
-                    controller: _emailController,
+                    controller: _emailAluno,
                     keyboardType: TextInputType.emailAddress,
                     validator: (text) {
                       if (text.isEmpty || !text.contains("@"))
@@ -60,34 +55,44 @@ class _LoginState extends State<Login> {
                     style: TextStyle(color: Colors.indigo),
                   ),
                   TextFormField(
-                    controller: _senhaController,
+                    controller: _senhaAluno,
                     decoration: InputDecoration(labelText: "Senha",
                       labelStyle: TextStyle(color: Colors.black,
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold),
                     ),
                     validator: (text) {
-                      if (text.isEmpty || text.length < 6)
+                      if (text.isEmpty || text.length < 2)
                         return "Senha inválida!";
                     },
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.indigo),
                   ),
                   SizedBox(
-                    height: 30.0,
+                    height: 50.0,
                   ),
                   ButtonTheme(
-                    height: 80.0,
+                    height: 90.0,
                     child: RaisedButton(
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
+                      onPressed: () async {
+                        bool formOk = _formKey.currentState.validate();
+                        if (!formOk) {
+                          // não chega até no botão se um campo tiver vazio
+                          return;
                         }
-                        model.signIn(
-                            email: _emailController.text,
-                            pass: _senhaController.text,
-                            onSuccess: _onSuccess,
-                            onFail: _onFail
-                        );
+                        String emailaluno = _emailAluno.text;
+                        String senhaaluno = _senhaAluno.text;
+
+                        Aluno usuarioAluno = await prefix0.LoginAlunoAPI
+                            .autentica(emailaluno, senhaaluno);
+                        if (usuarioAluno != null) {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => MenuInicialAluno()));
+                          print("usuario : $usuarioAluno");
+                        } else {
+                          print("usuario não logou");
+                        }
+
                       },
                       child: Text("ENTRAR",
                         style: TextStyle(color: Colors.white, fontSize: 30.0,
@@ -97,14 +102,14 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   SizedBox(
-                    height: 10.0,
+                    height: 50.0,
                   ),
                   ButtonTheme(
-                    height: 80.0,
+                    height: 90.0,
                     child: RaisedButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (
-                            context) => MyApp()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => MyApp()));
                       },
                       child: Text("VOLTAR",
                         style: TextStyle(color: Colors.white, fontSize: 30.0,
@@ -116,28 +121,13 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  ButtonTheme(
-                    height: 50.0,
-                    child: RaisedButton(
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (
-                            context) => LoginAluno()));
-                      },
-                      child: Text("Aluno",
-                        style: TextStyle(color: Colors.white, fontSize: 30.0),
-                      ),
-                      color: Colors.grey,
-                    ),
-                  ),
                 ],
               ),
-            );
-          },
         )
     );
   }
 
-  void _onSuccess() {
+/*  void _onSuccess() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => MenuInicialFuncionario()));
   }
@@ -150,5 +140,6 @@ class _LoginState extends State<Login> {
         )
     );
   }
+  */
 }
 
