@@ -4,8 +4,8 @@ import 'package:p_integrador/model/funcionarioModel.dart';
 import 'package:http/http.dart' as http;
 
 class LoginFuncionarioAPI {
-  static Future<Funcionario> autentica(
-      String emailfunc, String senhafunc) async {
+  static Future<Funcionario> autentica(String emailfunc,
+      String senhafunc) async {
     var url = 'http://192.168.25.9:8080/funcionario/autentica';
 
     Map<String, String> headers = {"Content-Type": "application/json"};

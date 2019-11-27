@@ -7,6 +7,7 @@ import 'package:p_integrador/pages/pagina_inicial.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'model/usuario_model.dart';
+import 'pages - aluno/buscar_atividade.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       model: UsuarioModel(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: PaginaInicial(),
+          home: MenuInicialFuncionario(),
         ),
     );
   }

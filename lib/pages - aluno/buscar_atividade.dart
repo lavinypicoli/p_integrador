@@ -24,19 +24,26 @@ class BuscarAtividade extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(15.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Center(
-              child: Text(
-                'Buscar Atividade',
+            Text('Buscar Atividade',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 30.0,
                     color: Colors.deepPurple,
                     fontWeight: FontWeight.bold),
+              ),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: "Digite o nome da Atividade",
+                fillColor: Colors.black,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                  borderSide: BorderSide(),
+                ),
               ),
             ),
             ButtonTheme(

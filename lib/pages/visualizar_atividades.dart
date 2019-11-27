@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:p_integrador/model/usuario_model.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:p_integrador/api/listaAtividadeAPI.dart';
+import 'dart:convert';
+import 'package:p_integrador/model/atividadeModel.dart';
 import 'cadastro_atividade.dart';
-import 'menu_inicial_funcionario.dart';
-
 
 class VisualizarAtividade extends StatefulWidget {
+
   @override
   _VisualizarAtividadeState createState() => _VisualizarAtividadeState();
 }
@@ -13,25 +13,13 @@ class VisualizarAtividade extends StatefulWidget {
 class _VisualizarAtividadeState extends State<VisualizarAtividade> {
 
   @override
-  void initState() {
-    super.initState();
-    //  _getAllAtividades();
-  }
-
-  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        title: ScopedModelDescendant<UsuarioModel>(
-          builder: (context, child, model) {
-            return Text(
-              "Olá, ${!model.isLoggedIn() ? "" : model.userData["nome"]}",
-                style: TextStyle(fontSize: 15.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold));
-          },
-        ),
+        title: Text("Olá"),
       ),
+      body: _body(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(context,
@@ -43,63 +31,81 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
         shape: RoundedRectangleBorder(),
         backgroundColor: Colors.blue,
       ),
-
-      /*
-      body: ListView.builder(
-          padding: EdgeInsets.all(5.0),
-          itemCount: atividades.length,
-          itemBuilder: (context, index) {
-            return _atividadeCard(context, index);
-          }
-      ),
-    */
     );
   }
 
-  Widget _atividadeCard(BuildContext context, int index) {
-    return GestureDetector(
-      child: Card(
-        child: Padding(
-          padding: EdgeInsets.only(left: 5.0),
-          child: Row(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(left: 5.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    /*
+  _body() {
+    Future<List<Atividade>> future = ListaAtividadeAPI.getAtividade();
 
-                    Text(atividades[index].nomeAtividade ?? "",
-                        style: TextStyle(
-                            fontSize: 25.0, fontWeight: FontWeight.bold
-                        ),
-                        textAlign: TextAlign.left
-                    ),
-                    Text(atividades[index].diaSemana ?? "",
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    Text(atividades[index].horario ?? "",
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    Text(   atividades[index].descricao ?? "",
-                      style: TextStyle(fontSize: 20.0),
-                    ),
+    return FutureBuilder(
+      future: ListaAtividadeAPI.getAtividade(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          print(snapshot.error);
+          return Center(
+            child: Text("Não foi possível encontrar atiivdades",
+                style: TextStyle(color: Colors.red, fontSize: 15.0)),
+          );
+        }
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
 
-                 */
-
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-      onTap: () {
-        // _showOptions(context, index);
+        List<Atividade> atividades = snapshot.data;
+        return _listView(atividades);
       },
     );
   }
+
+  Container _listView(List<Atividade> atividades) {
+    return Container(
+      padding: EdgeInsets.only(left: 5.0),
+      child: ListView.builder(
+          padding: EdgeInsets.all(5.0),
+          itemCount: atividades != null ? atividades.length : 0,
+          itemBuilder: (context, index) {
+            Atividade a = atividades[index];
+            return Card(
+              child: Padding(
+                padding: EdgeInsets.only(left: 5.0),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(a.nomeativ ?? "",
+                              style: TextStyle(
+                                  fontSize: 25.0, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.left),
+
+                          Text(a.diaativ ?? "",
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+
+                          Text(a.horaativ ?? "",
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+
+                          Text(a.descricaoativ ?? "",
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          }
+      ),
+    );
+  }
+
+
 /*
   void _showOptions(BuildContext context, int index) {
     showModalBottomSheet(
@@ -145,27 +151,7 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
   }
 
 
-  void _showAtividadePage({Atividade atividade}) async {
-    final recAtividade = await Navigator.push(context,
-        MaterialPageRoute(builder: (context) => CadastroAtividade(atividade: atividade,)));
-    if (recAtividade != null) {
-      if (atividade != null) {
-        var i = await controller.updateAtividade(recAtividade);
-      } else {
-        await controller.saveAtividade(recAtividade);
-      }
-      _getAllAtividades();
-    }
-  }
-
-  void _getAllAtividades() {
-    controller.getAllAtividade().then((list) {
-      setState(() {
-        atividades = list;
-      });
-    });
-  }
-*/
+ */
 
 }
 
