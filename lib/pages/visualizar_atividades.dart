@@ -43,7 +43,7 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
         if (snapshot.hasError) {
           print(snapshot.error);
           return Center(
-            child: Text("Não foi possível encontrar atiivdades",
+            child: Text("Não foi possível encontrar atividades",
                 style: TextStyle(color: Colors.red, fontSize: 15.0)),
           );
         }
@@ -77,20 +77,20 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(a.nomeativ ?? "",
+                          Text('Atividade: ' + a.nomeativ ?? "",
                               style: TextStyle(
                                   fontSize: 25.0, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.left),
 
-                          Text(a.diaativ ?? "",
+                          Text('Dia da Semana: ' + a.diaativ ?? "",
                             style: TextStyle(fontSize: 20.0),
                           ),
 
-                          Text(a.horaativ ?? "",
+                          Text('Horário: ' + a.horaativ ?? "",
                             style: TextStyle(fontSize: 20.0),
                           ),
 
-                          Text(a.descricaoativ ?? "",
+                          Text('Descrição: ' + a.descricaoativ ?? "",
                             style: TextStyle(fontSize: 20.0),
                           ),
                         ],
@@ -104,54 +104,6 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
       ),
     );
   }
-
-
-/*
-  void _showOptions(BuildContext context, int index) {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return BottomSheet(
-            onClosing: () {},
-            builder: (context) {
-              return Container(
-                padding: EdgeInsets.all(5.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    FlatButton(
-                      child: Text("Editar",
-                        style: TextStyle(color: Colors.orange, fontSize: 40.0),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                        _showAtividadePage(atividade: atividades[index]);
-                      },
-                    ),
-                    FlatButton(
-                      child: Text("Excluir",
-                        style: TextStyle(color: Colors.red, fontSize: 40.0),
-                      ),
-                      onPressed: () {
-                        controller.deleteAtividade(
-                            atividades[index].idAtividade);
-                        setState(() {
-                          atividades.removeAt(index);
-                          Navigator.pop(context);
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        }
-    );
-  }
-
-
- */
 
 }
 

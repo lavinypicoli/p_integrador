@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class CadastroAtividadeApi {
   static Future<bool> cadastraAtividade(String nomeativ, String diaativ,
       String horaativ, String descricaoativ) async {
-    var url = 'http://192.168.25.9:8080/atividade/save';
+    var url = 'http://192.168.15.3:8080/atividade/save';
 
     Map<String, String> headers = {"Content-Type": "application/json"};
 
