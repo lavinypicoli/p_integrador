@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:p_integrador/pages/cadastro_aluno.dart';
+import 'package:p_integrador/pages%20-%20aluno/cadastro_aluno.dart';
 import 'package:p_integrador/pages/cadastro_atividade.dart';
-import 'package:p_integrador/pages/login.dart';
+import 'package:p_integrador/pages%20-%20aluno/login.dart';
 import 'package:p_integrador/pages/menu_inicial_funcionario.dart';
 import 'package:p_integrador/pages/pagina_inicial.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       model: UsuarioModel(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: MenuInicialFuncionario(),
+          home: BuscarAtividade(),
         ),
     );
   }

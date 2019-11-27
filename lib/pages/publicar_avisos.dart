@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/api/publicaAvisoAPI.dart';
-
-import 'package:p_integrador/model/usuario_model.dart';
+import 'package:p_integrador/model/funcionarioModel.dart';
 import 'package:p_integrador/pages/visualizarAvisos.dart';
-import 'package:scoped_model/scoped_model.dart';
+
 
 import '../main.dart';
 import 'menu_inicial_funcionario.dart';
 
 class PublicarAvisos extends StatefulWidget {
-
   @override
   _PublicarAvisosState createState() => _PublicarAvisosState();
 }
 
 class _PublicarAvisosState extends State<PublicarAvisos> {
+
 
   final _textoaviso = TextEditingController();
   final _dataaviso = TextEditingController();
@@ -27,15 +26,9 @@ class _PublicarAvisosState extends State<PublicarAvisos> {
       //onWillPop: _requestPop,
       child: Scaffold(
         appBar: AppBar(
-          title: ScopedModelDescendant<UsuarioModel>(
-            builder: (context, child, model) {
-              return Text(
-                  "Olá, ${!model.isLoggedIn() ? "" : model.userData["nome"]}",
-                  style: TextStyle(fontSize: 15.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold));
-            },
-          ),
+          title: Text("", style: TextStyle(fontSize: 15.0,
+              color: Colors.white,
+              fontWeight: FontWeight.bold)),
         ),
         body: Form(
           key: _formKey,
@@ -136,37 +129,5 @@ class _PublicarAvisosState extends State<PublicarAvisos> {
       ),
     );
   }
-
-/*
-  Future<bool> _requestPop() async {
-    if (_userEdited) {
-      showDialog(context: context, builder: (context) {
-        return AlertDialog(
-          title: Text("Deseja mesmo descartar as alterações?"),
-          content: Text("Se sair as alterações serão perdidas."),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Cancelar"),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            FlatButton(
-              child: Text("Sim"),
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        );
-      }
-      );
-      return Future.value(false);
-    } else {
-      return Future.value(true);
-    }
-  }
-*/
 
 }

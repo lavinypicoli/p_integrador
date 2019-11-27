@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:p_integrador/api/apiResponse.dart';
 import 'package:p_integrador/api/loginAlunoAPI.dart' as prefix0;
 import 'package:p_integrador/api/loginFuncionarioAPI.dart';
 import 'package:p_integrador/model/alunoModel.dart';
 import 'package:p_integrador/model/funcionarioModel.dart';
 import 'package:p_integrador/pages%20-%20aluno/menu_inicial_aluno.dart';
 import 'package:p_integrador/pages/menu_inicial_funcionario.dart';
+import 'package:p_integrador/utils/alert.dart';
 import '../main.dart';
 
 class LoginFuncionario extends StatefulWidget {
@@ -89,19 +91,17 @@ class _LoginFuncionarioState extends State<LoginFuncionario> {
                     String emailfunc = _emailFunc.text;
                     String senhafunc = _senhaFunc.text;
 
-                    Funcionario usuarioFunc =
-                        await LoginFuncionarioAPI.autentica(
-                            emailfunc, senhafunc);
+                    APIResponse response = await LoginFuncionarioAPI.autentica(
+                        emailfunc, senhafunc);
 
-                    if (usuarioFunc != null) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MenuInicialFuncionario()));
+                    if (response.ok) {
+                      Funcionario usuarioFunc = response.result;
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => MenuInicialFuncionario()));
+
                       print("funcionario : $usuarioFunc");
                     } else {
-                      _onFail();
-                      print("funcionario não logou");
+                      alert(context, response.msg);
                     }
                   },
                   child: Text(
@@ -142,11 +142,4 @@ class _LoginFuncionarioState extends State<LoginFuncionario> {
         ));
   }
 
-  void _onFail() {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text("Falha ao Entrar!"),
-      backgroundColor: Colors.redAccent,
-      duration: Duration(seconds: 3),
-    ));
-  }
 }

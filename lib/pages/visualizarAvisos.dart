@@ -11,12 +11,11 @@ class VisualizarAvisos extends StatefulWidget {
 
 class _VisualizarAvisosState extends State<VisualizarAvisos> {
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Olá, ",
+        title: Text("",
             style: TextStyle(fontSize: 15.0,
                 color: Colors.white,
                 fontWeight: FontWeight.bold)),
@@ -59,23 +58,23 @@ class _VisualizarAvisosState extends State<VisualizarAvisos> {
 
   Container _listAviso(List<Aviso> avisos) {
     return Container(
-      padding: EdgeInsets.only(left: 5.0),
+      padding: EdgeInsets.only(left: 1.0),
       child: ListView.builder(
           padding: EdgeInsets.all(5.0),
           itemCount: avisos != null ? avisos.length : 0,
           itemBuilder: (context, index) {
             Aviso a = avisos[index];
             return Card(
+              color: Colors.grey[200],
               child: Padding(
-                padding: EdgeInsets.only(left: 5.0),
+                padding: EdgeInsets.all(35.0),
                 child: Row(
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.only(left: 5.0),
+                      padding: EdgeInsets.only(left: 1.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-
                           Text('Aviso: ' + a.textoaviso ?? "",
                               style: TextStyle(
                                   fontSize: 25.0, fontWeight: FontWeight.bold),

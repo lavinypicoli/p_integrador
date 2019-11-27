@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:p_integrador/api/listaAtividadeAPI.dart';
 import 'dart:convert';
 import 'package:p_integrador/model/atividadeModel.dart';
+import 'package:p_integrador/model/funcionarioModel.dart';
 import 'cadastro_atividade.dart';
 
 class VisualizarAtividade extends StatefulWidget {
@@ -17,7 +18,7 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Olá"),
+        title: Text(""),
       ),
       body: _body(),
       floatingActionButton: FloatingActionButton.extended(
@@ -68,8 +69,9 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
           itemBuilder: (context, index) {
             Atividade a = atividades[index];
             return Card(
+              color: Colors.grey[200],
               child: Padding(
-                padding: EdgeInsets.only(left: 5.0),
+                padding: EdgeInsets.all(22.0),
                 child: Row(
                   children: <Widget>[
                     Padding(
@@ -78,20 +80,21 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text('Atividade: ' + a.nomeativ ?? "",
+                              maxLines: 1,
                               style: TextStyle(
-                                  fontSize: 25.0, fontWeight: FontWeight.bold),
+                                  fontSize: 20.0, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.left),
 
                           Text('Dia da Semana: ' + a.diaativ ?? "",
-                            style: TextStyle(fontSize: 20.0),
+                            style: TextStyle(fontSize: 18.0),
                           ),
 
                           Text('Horário: ' + a.horaativ ?? "",
-                            style: TextStyle(fontSize: 20.0),
+                            style: TextStyle(fontSize: 18.0),
                           ),
 
                           Text('Descrição: ' + a.descricaoativ ?? "",
-                            style: TextStyle(fontSize: 20.0),
+                            style: TextStyle(fontSize: 18.0),
                           ),
                         ],
                       ),

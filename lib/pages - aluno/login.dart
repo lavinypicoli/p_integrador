@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:p_integrador/api/apiResponse.dart';
 import 'package:p_integrador/api/loginAlunoAPI.dart' as prefix0;
 import 'package:p_integrador/model/alunoModel.dart';
 import 'package:p_integrador/pages%20-%20aluno/menu_inicial_aluno.dart';
+import 'package:p_integrador/utils/alert.dart';
 
 
 import '../main.dart';
@@ -83,14 +85,16 @@ class _LoginState extends State<Login> {
                         String emailaluno = _emailAluno.text;
                         String senhaaluno = _senhaAluno.text;
 
-                        Aluno usuarioAluno = await prefix0.LoginAlunoAPI
+                        APIResponse respose = await prefix0.LoginAlunoAPI
                             .autentica(emailaluno, senhaaluno);
-                        if (usuarioAluno != null) {
+
+                        if (respose.ok) {
+                          Aluno usuarioAluno = respose.result;
                           Navigator.push(context, MaterialPageRoute(
                               builder: (context) => MenuInicialAluno()));
                           print("usuario : $usuarioAluno");
                         } else {
-                          print("usuario não logou");
+                          alert(context, respose.msg);
                         }
 
                       },
@@ -126,20 +130,5 @@ class _LoginState extends State<Login> {
         )
     );
   }
-
-/*  void _onSuccess() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => MenuInicialFuncionario()));
-  }
-
-  void _onFail() {
-    _scaffoldKey.currentState.showSnackBar(
-        SnackBar(content: Text("Falha ao Entrar!"),
-          backgroundColor: Colors.redAccent,
-          duration: Duration(seconds: 3),
-        )
-    );
-  }
-  */
 }
 

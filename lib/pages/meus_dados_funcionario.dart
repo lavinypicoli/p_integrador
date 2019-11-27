@@ -1,27 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:p_integrador/model/usuario_model.dart';
-import 'package:p_integrador/pages/publicar_avisos.dart';
-import 'package:scoped_model/scoped_model.dart';
-
-import '../main.dart';
+import 'package:p_integrador/model/funcionarioModel.dart';
 import 'menu_inicial_funcionario.dart';
 
 class MeusDadosFuncionario extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: ScopedModelDescendant<UsuarioModel>(
-          builder: (context, child, model) {
-            return Text(
-              "Olá, ${!model.isLoggedIn() ? "" : model.userData["nome"]}",
-              style: TextStyle(
-                  fontSize: 15.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            );
-          },
-        ),
+          title: Text("", style: TextStyle(
+              fontSize: 15.0, color: Colors.white, fontWeight: FontWeight.bold),
+          )
       ),
       body: Padding(
         padding: EdgeInsets.all(5.0),
@@ -39,17 +28,45 @@ class MeusDadosFuncionario extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
             ),
+            Card(
+              color: Colors.grey[200],
+              child: Padding(
+                padding: EdgeInsets.all(35.0),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 1.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('Funcionario: ',
+                              style: TextStyle(
+                                  fontSize: 25.0, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.left),
+
+                          Text('Email:',
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+
+                          Text('Senha: ',
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+
             ButtonTheme(
               height: 80.0,
               child: RaisedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MenuInicialFuncionario()));
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => MenuInicialFuncionario()));
                 },
-                child: Text(
-                  "Voltar ao Menu Inicial",
+                child: Text("Voltar ao Menu Inicial",
                   style: TextStyle(color: Colors.white, fontSize: 30.0),
                 ),
                 color: Colors.red,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/api/cadastroAlunoAPI.dart';
 import 'package:p_integrador/model/usuario_model.dart';
-import 'package:p_integrador/pages/login.dart';
+import 'package:p_integrador/pages%20-%20aluno/login.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'dart:async';
 import '../main.dart';
-import 'menu_inicial_funcionario.dart';
+import '../pages/menu_inicial_funcionario.dart';
 
 
 class Cadastro extends StatefulWidget{

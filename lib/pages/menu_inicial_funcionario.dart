@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p_integrador/model/funcionarioModel.dart';
 import 'package:p_integrador/model/usuario_model.dart';
 import 'package:p_integrador/model/usuario_model.dart' as prefix0;
 import 'package:p_integrador/pages/pagina_inicial.dart';
@@ -7,29 +8,25 @@ import 'package:p_integrador/pages/visualizar_atividades.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../main.dart';
-import 'login.dart';
+import '../pages - aluno/login.dart';
 import 'meus_dados_funcionario.dart';
 
 class MenuInicialFuncionario extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<UsuarioModel>(
-        builder: (context, child, model) {
           return WillPopScope(
             onWillPop: _onBackPressed,
             child: Scaffold(
               appBar: AppBar(
-                title: ScopedModelDescendant<UsuarioModel>(
-                  builder: (context, child, model) {
-                    return Text(
-                      "Olá, ${!model.isLoggedIn() ? "" : model
-                          .userData["nome"]}",
+                  title: Text(
+                    "",
                       style: TextStyle(fontSize: 15.0,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
-                    );
-                  },
-                ),
+                  )
+
               ),
               body: Padding(
                 padding: EdgeInsets.all(5.0),
@@ -87,11 +84,6 @@ class MenuInicialFuncionario extends StatelessWidget {
                       height: 80.0,
                       child: RaisedButton(
                         onPressed: () {
-                          if (!model.isLoggedIn())
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => Login()));
-                          else
-                            model.signOut();
                           Navigator.push(context, MaterialPageRoute(
                               builder: (context) => PaginaInicial()));
                         },
@@ -107,7 +99,6 @@ class MenuInicialFuncionario extends StatelessWidget {
             ),
           );
         }
-    );
   }
 
   Future<bool> _onBackPressed() async {
@@ -132,6 +123,4 @@ class MenuInicialFuncionario extends StatelessWidget {
         )
     );
   }
-
-}
 

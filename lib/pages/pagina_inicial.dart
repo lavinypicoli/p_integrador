@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/pages/login_funcionario.dart';
 
-import 'cadastro_aluno.dart';
-import 'login.dart';
+import '../pages - aluno/cadastro_aluno.dart';
+import '../pages - aluno/login.dart';
 
 class PaginaInicial extends StatelessWidget {
   @override

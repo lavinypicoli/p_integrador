@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/api/CadastroAtividadeAPI.dart';
+import 'package:p_integrador/model/funcionarioModel.dart';
 import 'package:p_integrador/model/usuario_model.dart';
 import 'package:p_integrador/pages/visualizar_atividades.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -22,22 +23,16 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
 
   final _formKey = GlobalKey<FormState>();
 
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       // onWillPop: _requestPop,
       child: Scaffold(
         appBar: AppBar(
-          title: ScopedModelDescendant<UsuarioModel>(
-            builder: (context, child, model) {
-              return Text(
-                "Olá, ${!model.isLoggedIn() ? "" : model.userData["nome"]}",
-                  style: TextStyle(fontSize: 15.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold));
-            },
-          ),
+            title: Text("",
+                style: TextStyle(fontSize: 15.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold))
         ),
         body: Form(
           key: _formKey,
@@ -151,38 +146,5 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
       ),
     );
   }
-
-
-/*
-  Future<bool> _requestPop() async {
-    if (_userEdited) {
-      showDialog(context: context, builder: (context) {
-            return AlertDialog(
-              title: Text("Deseja mesmo descartar as alterações?"),
-              content: Text("Se sair as alterações serão perdidas."),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text("Cancelar"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                FlatButton(
-                  child: Text("Sim"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            );
-          }
-      );
-      return Future.value(false);
-    } else {
-      return Future.value(true);
-    }
-  }
-*/
 
 }

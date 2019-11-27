@@ -24,4 +24,13 @@ class ListaAtividadeAPI {
 
     return atividades;
   }
+
+  static search(String query) async {
+    List<Atividade> atividades = await getAtividade();
+    return atividades.where((a) =>
+        a.nomeativ.toUpperCase().contains(query.toUpperCase())).toList();
+  }
+
+
+
 }
