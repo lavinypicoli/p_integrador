@@ -4,6 +4,10 @@ import 'menu_inicial_funcionario.dart';
 
 class MeusDadosFuncionario extends StatelessWidget {
 
+  final Funcionario funcionario;
+
+  MeusDadosFuncionario({this.funcionario});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,16 +43,16 @@ class MeusDadosFuncionario extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Funcionario: ',
+                          Text('Funcionario: ${funcionario.nomefunc}',
                               style: TextStyle(
                                   fontSize: 25.0, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.left),
 
-                          Text('Email:',
+                          Text('Email: ${funcionario.emailfunc}',
                             style: TextStyle(fontSize: 20.0),
                           ),
 
-                          Text('Senha: ',
+                          Text('Senha: ${funcionario.senhafunc}',
                             style: TextStyle(fontSize: 20.0),
                           ),
                         ],

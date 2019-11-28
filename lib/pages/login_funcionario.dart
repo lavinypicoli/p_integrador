@@ -97,7 +97,9 @@ class _LoginFuncionarioState extends State<LoginFuncionario> {
                     if (response.ok) {
                       Funcionario usuarioFunc = response.result;
                       Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => MenuInicialFuncionario()));
+                          builder: (context) =>
+                              MenuInicialFuncionario(
+                                funcionario: usuarioFunc,)));
 
                       print("funcionario : $usuarioFunc");
                     } else {

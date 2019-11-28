@@ -8,7 +8,7 @@ class LoginFuncionarioAPI {
   static Future<APIResponse<Funcionario>> autentica(String emailfunc,
       String senhafunc) async {
     try {
-      var url = 'http://192.168.15.3:8080/funcionario/autentica';
+      var url = 'http://192.168.0.7:8080/funcionario/autentica';
 
       Map<String, String> headers = {"Content-Type": "application/json"};
 
@@ -25,6 +25,8 @@ class LoginFuncionarioAPI {
 
       if (response.statusCode == 200) {
         final usuarioFunc = Funcionario(mapResponse);
+
+        print(usuarioFunc);
 
         return APIResponse.ok(usuarioFunc);
       }

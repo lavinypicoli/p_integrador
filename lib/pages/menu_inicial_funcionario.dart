@@ -13,92 +13,96 @@ import 'meus_dados_funcionario.dart';
 
 class MenuInicialFuncionario extends StatelessWidget {
 
+  final Funcionario funcionario;
+
+  MenuInicialFuncionario({this.funcionario});
 
   @override
   Widget build(BuildContext context) {
-          return WillPopScope(
-            onWillPop: _onBackPressed,
-            child: Scaffold(
-              appBar: AppBar(
-                  title: Text(
-                    "",
-                      style: TextStyle(fontSize: 15.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                  )
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        appBar: AppBar(
+            title: Text(
+              "${funcionario.nomefunc}",
+              style: TextStyle(fontSize: 15.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            )
 
-              ),
-              body: Padding(
-                padding: EdgeInsets.all(5.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Center(
-                      child: Text('MENU INICIAL', textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 30.0,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    ButtonTheme(
-                      height: 100.0,
-                      child: RaisedButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => MeusDadosFuncionario()));
-                        },
-                        child: Text("Meus Dados",
-                          style: TextStyle(color: Colors.white, fontSize: 30.0),
-                        ),
-                        color: Colors.teal[600],
-                      ),
-                    ),
-                    ButtonTheme(
-                      height: 100.0,
-                      child: RaisedButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => VisualizarAtividade()));
-                        },
-                        child: Text("Atividade",
-                          style: TextStyle(color: Colors.white, fontSize: 30.0),
-                        ),
-                        color: Colors.purple,
-                      ),
-                    ),
-                    ButtonTheme(
-                      height: 100.0,
-                      child: RaisedButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => VisualizarAvisos()));
-                        },
-                        child: Text("Aviso",
-                          style: TextStyle(color: Colors.white, fontSize: 30.0),
-                        ),
-                        color: Colors.lightBlue,
-                      ),
-                    ),
-                    ButtonTheme(
-                      height: 80.0,
-                      child: RaisedButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => PaginaInicial()));
-                        },
-                        child: Text("SAIR",
-                          style: TextStyle(color: Colors.white, fontSize: 30.0),
-                        ),
-                        color: Colors.red,
-                      ),
-                    ),
-                  ],
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Center(
+                child: Text('MENU INICIAL', textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30.0,
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
-          );
-        }
+              ButtonTheme(
+                height: 100.0,
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) =>
+                            MeusDadosFuncionario(funcionario: funcionario,)));
+                  },
+                  child: Text("Meus Dados",
+                    style: TextStyle(color: Colors.white, fontSize: 30.0),
+                  ),
+                  color: Colors.teal[600],
+                ),
+              ),
+              ButtonTheme(
+                height: 100.0,
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => VisualizarAtividade()));
+                  },
+                  child: Text("Atividade",
+                    style: TextStyle(color: Colors.white, fontSize: 30.0),
+                  ),
+                  color: Colors.purple,
+                ),
+              ),
+              ButtonTheme(
+                height: 100.0,
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => VisualizarAvisos()));
+                  },
+                  child: Text("Aviso",
+                    style: TextStyle(color: Colors.white, fontSize: 30.0),
+                  ),
+                  color: Colors.lightBlue,
+                ),
+              ),
+              ButtonTheme(
+                height: 80.0,
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => PaginaInicial()));
+                  },
+                  child: Text("SAIR",
+                    style: TextStyle(color: Colors.white, fontSize: 30.0),
+                  ),
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
   }
 
   Future<bool> _onBackPressed() async {
