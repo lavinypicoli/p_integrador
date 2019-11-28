@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/model/atividadeModel.dart';
-import 'package:p_integrador/model/usuario_model.dart';
 import 'package:p_integrador/pages%20-%20aluno/AtividadeSearch.dart';
 import 'package:p_integrador/pages/publicar_avisos.dart';
 import 'package:p_integrador/utils/alert.dart';
@@ -18,6 +17,10 @@ class BuscarAtividade extends StatefulWidget {
 }
 
 class _BuscarAtividadeState extends State<BuscarAtividade> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
 
   @override
@@ -72,12 +75,17 @@ class _BuscarAtividadeState extends State<BuscarAtividade> {
   }
 
   _onClickSearch() async {
-    var context;
     final atividade = await showSearch<Atividade>(
         context: context, delegate: AtividadeSearch());
+
     if (atividade != null) {
       var alert = prefix0.alert(context, "Busca", atividade.nomeativ);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
 

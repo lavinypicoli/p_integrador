@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/api/listaAtividadeAPI.dart';
 import 'package:p_integrador/model/atividadeModel.dart';
-import 'package:p_integrador/pages/AtividadadeListView.dart';
+import 'package:p_integrador/pages%20-%20aluno/AtivListView.dart';
 
 class AtividadeSearch extends SearchDelegate<Atividade> {
   @override
@@ -34,10 +34,7 @@ class AtividadeSearch extends SearchDelegate<Atividade> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final List<Atividade> atividades = snapshot.data;
-              return AtividadeListView(
-                atividades,
-                search: true,
-              );
+              return AtivListView(atividades, search: true,);
             } else {
               return Center(
                 child: CircularProgressIndicator(),
@@ -50,6 +47,6 @@ class AtividadeSearch extends SearchDelegate<Atividade> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return buildSuggestions(context);
+    return buildResults(context);
   }
 }
