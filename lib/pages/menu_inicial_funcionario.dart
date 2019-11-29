@@ -23,8 +23,7 @@ class MenuInicialFuncionario extends StatelessWidget {
       onWillPop: _onBackPressed,
       child: Scaffold(
         appBar: AppBar(
-            title: Text(
-              "${funcionario.nomefunc}",
+            title: Text("Olá, ${funcionario.nomefunc}",
               style: TextStyle(fontSize: 15.0,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
@@ -103,7 +102,7 @@ class MenuInicialFuncionario extends StatelessWidget {
       ),
     );
   }
-  }
+}
 
   Future<bool> _onBackPressed() async {
     var context;

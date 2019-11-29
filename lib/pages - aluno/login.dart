@@ -91,7 +91,8 @@ class _LoginState extends State<Login> {
                         if (respose.ok) {
                           Aluno usuarioAluno = respose.result;
                           Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => MenuInicialAluno()));
+                              builder: (context) =>
+                                  MenuInicialAluno(aluno: usuarioAluno,)));
                           print("usuario : $usuarioAluno");
                         } else {
                           alert(context, respose.msg);

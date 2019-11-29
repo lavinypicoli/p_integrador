@@ -46,6 +46,7 @@ class MeusDadosFuncionario extends StatelessWidget {
                           Text('Funcionario: ${funcionario.nomefunc}',
                               style: TextStyle(
                                   fontSize: 25.0, fontWeight: FontWeight.bold),
+
                               textAlign: TextAlign.left),
 
                           Text('Email: ${funcionario.emailfunc}',
@@ -68,7 +69,8 @@ class MeusDadosFuncionario extends StatelessWidget {
               child: RaisedButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => MenuInicialFuncionario()));
+                      builder: (context) =>
+                          MenuInicialFuncionario(funcionario: funcionario,)));
                 },
                 child: Text("Voltar ao Menu Inicial",
                   style: TextStyle(color: Colors.white, fontSize: 30.0),

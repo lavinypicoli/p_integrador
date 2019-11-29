@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p_integrador/model/alunoModel.dart';
 import 'package:p_integrador/model/usuario_model.dart';
 import 'package:p_integrador/pages%20-%20aluno/visualizar_avisos.dart';
 import 'package:p_integrador/pages/pagina_inicial.dart';
@@ -9,13 +10,19 @@ import 'meus_dados_aluno.dart';
 import 'minha_agenda.dart';
 
 class MenuInicialAluno extends StatelessWidget {
+
+  final Aluno aluno;
+
+  MenuInicialAluno({this.aluno});
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
         appBar: AppBar(
-            title: Text("", style: TextStyle(fontSize: 15.0,
+            title: Text(
+                "Olá, ${aluno.nomealuno}", style: TextStyle(fontSize: 15.0,
                 color: Colors.white,
                 fontWeight: FontWeight.bold))
         ),
@@ -38,7 +45,8 @@ class MenuInicialAluno extends StatelessWidget {
                 child: RaisedButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MeusDados()));
+                        MaterialPageRoute(
+                            builder: (context) => MeusDados(aluno: aluno,)));
                   },
                   child: Text(
                       "Meus Dados",
@@ -50,8 +58,7 @@ class MenuInicialAluno extends StatelessWidget {
                 height: 90.0,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (
-                        context) => MinhaAgenda()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MinhaAgenda()));
                   },
                   child: Text(
                     "Minha Agenda",
@@ -64,8 +71,7 @@ class MenuInicialAluno extends StatelessWidget {
                 height: 90.0,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (
-                        context) => BuscarAtividade()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => BuscarAtividade()));
                   },
                   child: Text(
                     "Buscar Atividade",
@@ -78,8 +84,7 @@ class MenuInicialAluno extends StatelessWidget {
                 height: 90.0,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (
-                        context) => VisualizarAvisosAluno()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => VisualizarAvisosAluno()));
                   },
                   child: Text(
                     "Aviso",
@@ -92,8 +97,7 @@ class MenuInicialAluno extends StatelessWidget {
                 height: 80.0,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (
-                        context) => PaginaInicial()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaInicial()));
                   },
                   child: Text(
                       "SAIR",
