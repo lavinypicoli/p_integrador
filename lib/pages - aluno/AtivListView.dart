@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:p_integrador/model/atividadeModel.dart';
+import 'package:p_integrador/pages%20-%20aluno/minha_agenda.dart';
 
 class AtivListView extends StatelessWidget {
   final List<Atividade> atividades;
@@ -27,19 +28,27 @@ class AtivListView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Center(
-                        child: Text(
-                          a.nomeativ,
-                          maxLines: 1,
+                      Text(
+                        'Atividade: ${a.nomeativ}',
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 25, color: Colors.black),
+                        style: TextStyle(fontSize: 23, color: Colors.black),
                         ),
+                      Text(
+                        'Dia da Semana: ${a.diaativ}',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 20, color: Colors.black),
                       ),
+                      Text(
+                        'Horário: ${a.horaativ}',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      ),
+
                       ButtonTheme.bar(
                         child: ButtonBar(
                           children: <Widget>[
                             FlatButton(
-                              child: const Text('Participaar'),
+                              child: const Text('Participar'),
                               onPressed: () {
                                 _onClickAtividade(context, a);
                               },
@@ -59,6 +68,7 @@ class AtivListView extends StatelessWidget {
   void _onClickAtividade(BuildContext context, Atividade a) async {
     if (search) {
       Navigator.pop(context, a);
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => MinhaAgenda(a)));
     } else {
       print("NÃO FUNCIONOU ESSA CARALHA");
     }

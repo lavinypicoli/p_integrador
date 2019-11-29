@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/model/alunoModel.dart';
-import 'package:p_integrador/model/usuario_model.dart';
 import 'package:p_integrador/pages%20-%20aluno/visualizar_avisos.dart';
 import 'package:p_integrador/pages/pagina_inicial.dart';
-import 'package:scoped_model/scoped_model.dart';
+
 
 import 'buscar_atividade.dart';
 import 'meus_dados_aluno.dart';

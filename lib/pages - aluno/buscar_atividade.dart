@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p_integrador/model/alunoModel.dart';
 import 'package:p_integrador/model/atividadeModel.dart';
 import 'package:p_integrador/pages%20-%20aluno/AtividadeSearch.dart';
 import 'package:p_integrador/pages/publicar_avisos.dart';
@@ -17,11 +18,9 @@ class BuscarAtividade extends StatefulWidget {
 }
 
 class _BuscarAtividadeState extends State<BuscarAtividade> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  final Aluno aluno;
 
+  _BuscarAtividadeState({this.aluno});
 
   @override
   Widget build(BuildContext context) {
@@ -37,36 +36,16 @@ class _BuscarAtividadeState extends State<BuscarAtividade> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.only(left: 65),
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.start,
           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text('Buscar Atividade',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 30.0,
+              style: TextStyle(fontSize: 30.0,
                   color: Colors.deepPurple,
                   fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 50.0,),
-            SizedBox(height: 285.0,),
-            ButtonTheme(
-              height: 80.0,
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => MenuInicialAluno()));
-                },
-                child: Text(
-                  "Voltar ao Menu Inicial",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30.0,
-                  ),
-                ),
-                color: Colors.red,
-              ),
             ),
           ],
         ),
