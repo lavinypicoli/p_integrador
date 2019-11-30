@@ -12,15 +12,25 @@ import 'menu_inicial_aluno.dart';
 
 class BuscarAtividade extends StatefulWidget {
 
+  final Aluno aluno;
+
+  BuscarAtividade({this.aluno});
+
+
+  retornaAluno() {
+    print("VE SE VEIO A PORRA DO ALUNO $aluno");
+    return aluno;
+  }
+
   @override
-  _BuscarAtividadeState createState() => _BuscarAtividadeState();
+  _BuscarAtividadeState createState() => _BuscarAtividadeState(aluno: aluno);
 
 }
 
 class _BuscarAtividadeState extends State<BuscarAtividade> {
   final Aluno aluno;
-
   _BuscarAtividadeState({this.aluno});
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,17 +64,25 @@ class _BuscarAtividadeState extends State<BuscarAtividade> {
   }
 
   _onClickSearch() async {
+    /* final a = retornaAlunoLogado();
+    print(a);*/
     final atividade = await showSearch<Atividade>(
-        context: context, delegate: AtividadeSearch());
+        context: context, delegate: AtividadeSearch(aluno: aluno));
+
 
     if (atividade != null) {
       var alert = prefix0.alert(context, "Busca", atividade.nomeativ);
     }
   }
 
+
   @override
   void dispose() {
     super.dispose();
+  }
+
+  retornaAlunoLogado() {
+
   }
 
 

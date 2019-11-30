@@ -1,13 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:p_integrador/api/AlunoParticipaAPI.dart';
+import 'package:p_integrador/model/alunoModel.dart';
 import 'package:p_integrador/model/atividadeModel.dart';
+import 'package:p_integrador/pages%20-%20aluno/menu_inicial_aluno.dart';
 import 'package:p_integrador/pages%20-%20aluno/minha_agenda.dart';
 
 class AtivListView extends StatelessWidget {
+
+  final Aluno aluno;
   final List<Atividade> atividades;
   final bool search;
 
-  const AtivListView(this.atividades, {this.search = false});
+  const AtivListView(this.atividades, {this.aluno, this.search});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class AtivListView extends StatelessWidget {
             height: 150,
             child: InkWell(
               onTap: () {
-                _onClickAtividade(context, a);
+                _onClickAtividade(context, a, aluno);
               },
               child: Card(
                 child: Padding(
@@ -29,10 +34,10 @@ class AtivListView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Atividade: ${a.nomeativ}',
-                          overflow: TextOverflow.ellipsis,
+                        'Atividade: ${a.nomeativ}, ${this.aluno}',
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(fontSize: 23, color: Colors.black),
-                        ),
+                      ),
                       Text(
                         'Dia da Semana: ${a.diaativ}',
                         overflow: TextOverflow.ellipsis,
@@ -50,7 +55,8 @@ class AtivListView extends StatelessWidget {
                             FlatButton(
                               child: const Text('Participar'),
                               onPressed: () {
-                                _onClickAtividade(context, a);
+                                _onClickAtividade(
+                                    context, a, MenuInicialAluno().aluno);
                               },
                             )
                           ],
@@ -65,12 +71,7 @@ class AtivListView extends StatelessWidget {
         });
   }
 
-  void _onClickAtividade(BuildContext context, Atividade a) async {
-    if (search) {
-      Navigator.pop(context, a);
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => MinhaAgenda(a)));
-    } else {
-      print("NÃO FUNCIONOU ESSA CARALHA");
-    }
+  void _onClickAtividade(BuildContext context, Atividade a, Aluno aluno) async {
+    bool ok = await AlunoParticipaAPI.salvaQuemParticipa(a, aluno);
   }
 }

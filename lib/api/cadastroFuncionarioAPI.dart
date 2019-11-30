@@ -6,7 +6,7 @@ class CadastroFuncionarioApi {
 
   static Future<bool> cadastraFuncionario(String nomefunc, String emailfunc,
       String senhafunc) async {
-    var url = 'http://192.168.15.3:8080/funcionario/save';
+    var url = 'http://192.168.0.7:8080/funcionario/save';
 
     Map<String, String> headers = {
       "Content-Type": "application/json"

@@ -11,7 +11,6 @@ import 'minha_agenda.dart';
 class MenuInicialAluno extends StatelessWidget {
 
   final Aluno aluno;
-
   MenuInicialAluno({this.aluno});
 
   @override
@@ -71,7 +70,8 @@ class MenuInicialAluno extends StatelessWidget {
                 height: 90.0,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => BuscarAtividade()));
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => BuscarAtividade(aluno: aluno,)));
                   },
                   child: Text(
                     "Buscar Atividade",
@@ -112,6 +112,11 @@ class MenuInicialAluno extends StatelessWidget {
     );
   }
 }
+
+_retornaUsuarioLogado() {
+
+}
+
 
 Future<bool> _onBackPressed() async {
   var context;

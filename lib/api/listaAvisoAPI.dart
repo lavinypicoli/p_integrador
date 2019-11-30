@@ -4,7 +4,7 @@ import 'package:p_integrador/model/avisoModel.dart';
 
 class ListaAvisoAPI {
   static Future<List<Aviso>> getAviso() async {
-    var url = 'http://192.168.15.3:8080/aviso';
+    var url = 'http://192.168.0.7:8080/aviso';
 
     var response = await http.get(url);
     String json = response.body;
