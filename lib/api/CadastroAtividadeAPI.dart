@@ -1,6 +1,9 @@
+
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:p_integrador/api/apiResponse.dart';
+import 'package:p_integrador/model/atividadeModel.dart';
 
 class CadastroAtividadeApi {
   static Future<bool> cadastraAtividade(String nomeativ, String diaativ,

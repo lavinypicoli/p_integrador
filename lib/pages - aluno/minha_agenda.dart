@@ -1,10 +1,23 @@
+
 import 'package:flutter/material.dart';
+import 'package:p_integrador/model/alunoModel.dart';
+import 'package:p_integrador/pages%20-%20aluno/menu_inicial_aluno.dart';
 
-import '../main.dart';
-import 'menu_inicial_aluno.dart';
+class MinhaAgenda extends StatefulWidget {
 
-class MinhaAgenda extends StatelessWidget {
+  final Aluno aluno;
 
+  MinhaAgenda({this.aluno});
+
+  @override
+  _MinhaAgendaState createState() => _MinhaAgendaState();
+}
+
+class _MinhaAgendaState extends State<MinhaAgenda> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,22 +43,24 @@ class MinhaAgenda extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            ButtonTheme(
+            /*     ButtonTheme(
               height: 80.0,
               child: RaisedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => MenuInicialAluno()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MenuInicialAluno()));
                 },
                 child: Text("Voltar ao Menu Inicial",
                   style: TextStyle(color: Colors.white, fontSize: 30.0,),
                 ),
                 color: Colors.red,
               ),
-            ),
+            ),*/
           ],
         ),
       ),
     );
   }
+
+
 }
+

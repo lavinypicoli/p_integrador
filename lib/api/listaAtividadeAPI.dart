@@ -5,7 +5,7 @@ import 'package:p_integrador/model/atividadeModel.dart';
 
 class ListaAtividadeAPI {
   static Future<List<Atividade>> getAtividade() async {
-    var url = 'http://172.21.14.163:8080/atividade';
+    var url = 'http://192.168.15.3:8080/atividade';
 
     // print("GET> $url");
 

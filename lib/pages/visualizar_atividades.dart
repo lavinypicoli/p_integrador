@@ -6,6 +6,9 @@ import 'package:p_integrador/model/funcionarioModel.dart';
 import 'cadastro_atividade.dart';
 
 class VisualizarAtividade extends StatefulWidget {
+  final Atividade atividade;
+
+  const VisualizarAtividade({this.atividade});
 
   @override
   _VisualizarAtividadeState createState() => _VisualizarAtividadeState();
@@ -13,9 +16,16 @@ class VisualizarAtividade extends StatefulWidget {
 
 class _VisualizarAtividadeState extends State<VisualizarAtividade> {
 
+  Atividade get atividade => widget.atividade;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(""),
@@ -68,38 +78,56 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
           itemCount: atividades != null ? atividades.length : 0,
           itemBuilder: (context, index) {
             Atividade a = atividades[index];
-            return Card(
-              color: Colors.grey[200],
-              child: Padding(
-                padding: EdgeInsets.all(22.0),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(left: 5.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('Atividade: ' + a.nomeativ ?? "",
-                              maxLines: 1,
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.left),
+            return PopupMenuButton<String>(
+              onSelected: (value) {
+                _onClickPopupMenu(value);
+              },
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem(
+                    value: "Editar",
+                    child: Text("Editar"),
+                  ),
+                  PopupMenuItem(
+                    value: "Deletar",
+                    child: Text("Deletar"),
+                  ),
+                ];
+              },
+              child: Card(
+                color: Colors.grey[200],
+                child: Padding(
+                  padding: EdgeInsets.all(22.0),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('Atividade: ' + a.nomeativ ?? "",
+                                maxLines: 1,
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.left),
 
-                          Text('Dia da Semana: ' + a.diaativ ?? "",
-                            style: TextStyle(fontSize: 18.0),
-                          ),
+                            Text('Dia da Semana: ' + a.diaativ ?? "",
+                              style: TextStyle(fontSize: 18.0),
+                            ),
 
-                          Text('Horário: ' + a.horaativ ?? "",
-                            style: TextStyle(fontSize: 18.0),
-                          ),
+                            Text('Horário: ' + a.horaativ ?? "",
+                              style: TextStyle(fontSize: 18.0),
+                            ),
 
-                          Text('Descrição: ' + a.descricaoativ ?? "",
-                            style: TextStyle(fontSize: 18.0),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                            Text('Descrição: ' + a.descricaoativ ?? "",
+                              style: TextStyle(fontSize: 18.0),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             );
@@ -107,6 +135,15 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
       ),
     );
   }
+
+  void _onClickPopupMenu(String value) {
+    print("_onClickPopupMenu > $value");
+    if ("Editar" == value) {
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) => CadastroAtividade(atividade: atividade,)));
+    }
+  }
+
 
 }
 

@@ -57,7 +57,8 @@ class MenuInicialAluno extends StatelessWidget {
                 height: 90.0,
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MinhaAgenda()));
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => MinhaAgenda(aluno: aluno,)));
                   },
                   child: Text(
                     "Minha Agenda",

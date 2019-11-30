@@ -6,7 +6,7 @@ class PublicaAvisoApi {
 
   static Future<bool> publicaAviso(String textoaviso, String dataaviso,
       String horaaviso) async {
-    var url = 'http://172.21.14.163:8080/aviso/save';
+    var url = 'http://192.168.15.3:8080/aviso/save';
 
     Map<String, String> headers = {"Content-Type": "application/json"};
 

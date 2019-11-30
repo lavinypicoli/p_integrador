@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/api/CadastroAtividadeAPI.dart';
-import 'package:p_integrador/model/funcionarioModel.dart';
-import 'package:p_integrador/model/usuario_model.dart';
+import 'package:p_integrador/model/atividadeModel.dart';
 import 'package:p_integrador/pages/visualizar_atividades.dart';
-import 'package:scoped_model/scoped_model.dart';
+
 
 import '../main.dart';
 import 'menu_inicial_funcionario.dart';
 
 class CadastroAtividade extends StatefulWidget {
+
+  final Atividade atividade;
+
+  CadastroAtividade({this.atividade});
 
   @override
   _CadastroAtividadeState createState() => _CadastroAtividadeState();
@@ -22,6 +25,22 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
   final _descricaoativ = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  Atividade get atividade => widget.atividade;
+
+
+  @override
+  void initState() {
+    super.initState();
+    if (atividade != null) {
+      _nomeativ.text = atividade.nomeativ;
+      _diaativ.text = atividade.diaativ;
+      _horaativ.text = atividade.horaativ;
+      _descricaoativ.text = atividade.descricaoativ;
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -146,5 +165,6 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
       ),
     );
   }
+
 
 }

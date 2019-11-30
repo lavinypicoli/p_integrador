@@ -7,7 +7,7 @@ class LoginAlunoAPI {
   static Future<APIResponse<Aluno>> autentica(String emailaluno,
       String senhaaluno) async {
     try {
-      var url = 'http://172.21.14.163:8080/aluno/autentica';
+      var url = 'http://192.168.15.3:8080/aluno/autentica';
 
       Map<String, String> headers = {"Content-Type": "application/json"};
 
