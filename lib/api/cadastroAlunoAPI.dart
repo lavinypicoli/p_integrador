@@ -6,7 +6,7 @@ class CadastroAlunoApi {
 
   static Future<bool> cadastroAluno(String nomealuno, String datanasc,
       String emailaluno, String senhaaluno) async {
-    var url = 'http://192.168.0.7:8080/aluno/save';
+    var url = 'https://voice-projetointegrador.herokuapp.com/aluno/save';
 
     Map<String, String> headers = {
       "Content-Type": "application/json"

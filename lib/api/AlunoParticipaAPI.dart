@@ -5,9 +5,9 @@ import 'package:p_integrador/model/alunoModel.dart';
 import 'package:p_integrador/model/atividadeModel.dart';
 
 class AlunoParticipaAPI {
-  static Future<bool> salvaQuemParticipa(
-      Atividade atividade, Aluno aluno) async {
-    var url = 'http://192.168.0.7:8080/alunoparticipa/salvaParticipa';
+  static Future<bool> salvaQuemParticipa(Atividade atividade,
+      Aluno aluno) async {
+    var url = 'https://voice-projetointegrador.herokuapp.com/alunoparticipa/salvaParticipa';
 
     int idatividadep = atividade.idativ;
     int idalunop = aluno.idaluno;

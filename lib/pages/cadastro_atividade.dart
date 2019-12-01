@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p_integrador/api/CadastroAtividadeAPI.dart';
 import 'package:p_integrador/model/atividadeModel.dart';
+import 'package:p_integrador/model/funcionarioModel.dart';
 import 'package:p_integrador/pages/visualizar_atividades.dart';
 
 
@@ -8,16 +9,23 @@ import '../main.dart';
 import 'menu_inicial_funcionario.dart';
 
 class CadastroAtividade extends StatefulWidget {
-
   final Atividade atividade;
+  final Funcionario funcionario;
 
-  CadastroAtividade({this.atividade});
+  CadastroAtividade({this.atividade, this.funcionario});
 
   @override
-  _CadastroAtividadeState createState() => _CadastroAtividadeState();
+  _CadastroAtividadeState createState() =>
+      _CadastroAtividadeState(funcionario: funcionario, atividade: atividade);
 }
 
 class _CadastroAtividadeState extends State<CadastroAtividade> {
+
+
+  final Atividade atividade;
+  final Funcionario funcionario;
+
+  _CadastroAtividadeState({this.atividade, this.funcionario});
 
   final _nomeativ = TextEditingController();
   final _diaativ = TextEditingController();
@@ -25,8 +33,6 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
   final _descricaoativ = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-
-  Atividade get atividade => widget.atividade;
 
 
   @override
@@ -39,7 +45,6 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
       _descricaoativ.text = atividade.descricaoativ;
     }
   }
-
 
 
   @override
@@ -146,19 +151,19 @@ class _CadastroAtividadeState extends State<CadastroAtividade> {
               SizedBox(
                 height: 70.0,
               ),
-              ButtonTheme(
+              /*   ButtonTheme(
                 height: 80.0,
                 child: RaisedButton(
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => MenuInicialFuncionario()));
+                        builder: (context) => MenuInicialFuncionario(funcionario: funcionario,)));
                   },
                   child: Text("Voltar ao Menu Inicial",
                     style: TextStyle(color: Colors.white, fontSize: 30.0),
                   ),
                   color: Colors.red,
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

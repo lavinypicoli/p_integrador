@@ -6,7 +6,7 @@ class PublicaAvisoApi {
 
   static Future<bool> publicaAviso(String textoaviso, String dataaviso,
       String horaaviso) async {
-    var url = 'http://192.168.0.7:8080/aviso/save';
+    var url = 'https://voice-projetointegrador.herokuapp.com/aviso/save';
 
     Map<String, String> headers = {"Content-Type": "application/json"};
 

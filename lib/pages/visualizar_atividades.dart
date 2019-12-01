@@ -6,17 +6,24 @@ import 'package:p_integrador/model/funcionarioModel.dart';
 import 'cadastro_atividade.dart';
 
 class VisualizarAtividade extends StatefulWidget {
+  final Funcionario funcionario;
   final Atividade atividade;
 
-  const VisualizarAtividade({this.atividade});
+
+  VisualizarAtividade({this.funcionario, this.atividade});
 
   @override
-  _VisualizarAtividadeState createState() => _VisualizarAtividadeState();
+  _VisualizarAtividadeState createState() =>
+      _VisualizarAtividadeState(funcionario: funcionario, atividade: atividade);
 }
 
 class _VisualizarAtividadeState extends State<VisualizarAtividade> {
 
-  Atividade get atividade => widget.atividade;
+  final Funcionario funcionario;
+  final Atividade atividade;
+
+  _VisualizarAtividadeState({this.funcionario, this.atividade});
+
 
   @override
   void initState() {
@@ -33,8 +40,8 @@ class _VisualizarAtividadeState extends State<VisualizarAtividade> {
       body: _body(),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CadastroAtividade()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>
+              CadastroAtividade(funcionario: funcionario,)));
         },
         label: Text('Cadastrar nova atividade',
           style: TextStyle(fontSize: 24.0, color: Colors.white),

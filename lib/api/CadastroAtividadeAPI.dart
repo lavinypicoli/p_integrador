@@ -8,7 +8,7 @@ import 'package:p_integrador/model/atividadeModel.dart';
 class CadastroAtividadeApi {
   static Future<bool> cadastraAtividade(String nomeativ, String diaativ,
       String horaativ, String descricaoativ) async {
-    var url = 'http://192.168.0.7:8080/atividade/save';
+    var url = 'https://voice-projetointegrador.herokuapp.com/atividade/save';
 
     Map<String, String> headers = {"Content-Type": "application/json"};
 

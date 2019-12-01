@@ -34,7 +34,7 @@ class AtivListView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Atividade: ${a.nomeativ}, ${this.aluno}',
+                        'Atividade: ${a.nomeativ}',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(fontSize: 23, color: Colors.black),
                       ),
@@ -55,8 +55,7 @@ class AtivListView extends StatelessWidget {
                             FlatButton(
                               child: const Text('Participar'),
                               onPressed: () {
-                                _onClickAtividade(
-                                    context, a, MenuInicialAluno().aluno);
+                                _onClickAtividade(context, a, aluno);
                               },
                             )
                           ],

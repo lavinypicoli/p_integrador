@@ -5,7 +5,7 @@ import 'package:p_integrador/model/atividadeModel.dart';
 
 class ListaAtividadeAPI {
   static Future<List<Atividade>> getAtividade() async {
-    var url = 'http://192.168.0.7:8080/atividade';
+    var url = 'https://voice-projetointegrador.herokuapp.com/atividade';
 
     // print("GET> $url");
 

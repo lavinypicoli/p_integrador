@@ -110,7 +110,7 @@ class _PublicarAvisosState extends State<PublicarAvisos> {
               SizedBox(
                 height: 90.0,
               ),
-              ButtonTheme(
+              /*    ButtonTheme(
                 height: 80.0,
                 child: RaisedButton(
                   onPressed: () {
@@ -122,7 +122,7 @@ class _PublicarAvisosState extends State<PublicarAvisos> {
                   ),
                   color: Colors.red,
                 ),
-              ),
+              )*/
             ],
           ),
         ),
